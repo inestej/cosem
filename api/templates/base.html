@@ -20,7 +20,7 @@
         <nav class="navbar navbar-expand-sm fixed-top navbar-light">
             <div class="container-fluid">
                 <a class="navbar-brand" href="{{ url_for('home') }}">
-                    <img src="https://i.postimg.cc/gkmcPnq6/crop-logo.png" alt="" width="75" height="75" class="d-inline-block align-text-top">
+                    <img src="https://i.postimg.cc/1zZg1sp0/cosem-logo-removebg-preview.png" alt="" width="75" height="75" class="d-inline-block align-text-top">
                     COSEM
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
@@ -46,8 +46,10 @@
                         </li>
                     </ul>
                 </div>
-                <button type="button" style="margin-right: 15px;" onclick="window.location.href = '{{ url_for('register') }}';" class="btn btn-warning">Sign Up</button>
-                <button type="button" class="btn btn-success" onclick="window.location.href = '{{ url_for('login') }}';" style="background: light green;">Login</button>
+                <div class="navbar-buttons">
+                    <button type="button" style="" onclick="window.location.href = '{{ url_for('register') }}';" class="btn btn-warning">Sign Up</button>
+                    <button type="button" class="btn btn-success" onclick="window.location.href = '{{ url_for('login') }}';" style="background: light green;">Login</button>
+                </div>
             </div>
         </nav>
     </div>

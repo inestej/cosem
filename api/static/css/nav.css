@@ -1,11 +1,12 @@
 .navbar-nav {
     flex-direction: row;
-    justify-content: center;
+    /*justify-content: center;*/
     width: 100%;
+    margin-left: 20px;
 }
 
 .nav-item {
-    padding: 0 15px; /* Adjust the padding as needed */
+    padding: 0 20px; /* Adjust the padding as needed */
 }
 
 .ms-auto {
@@ -15,12 +16,18 @@
 .navbar-brand {
     display: flex;
     align-items: center;
+    margin-left: 150px;
 }
 
 .navbar-brand img {
     margin-right: 10px;
 }
-
+.navbar-buttons {
+    margin-right: 150px; /* Adjust this value to add space between buttons and the right edge */
+}
+.navbar-buttons .btn {
+    margin-left: 20px; /* Adjust this value to add space between the buttons */
+}
 /* Navbar transition background */
 .navbar-scroll {
     background: linear-gradient(135deg, #149e2b 0%, #80ff80 100%) !important;
