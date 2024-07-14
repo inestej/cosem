@@ -13,7 +13,7 @@ from urllib.parse import urlparse
 app = Flask(__name__, template_folder="templates")
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'thisisasecretkey')
 bcrypt = Bcrypt(app)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgres://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
@@ -33,7 +33,7 @@ class User(db.Model, UserMixin):
 
 # Function to create the user table if it doesn't exist
 def create_user_table():
-    db_uri = os.getenv('DATABASE_URL', 'postgres://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
+    db_uri = os.getenv('DATABASE_URL', 'postgresql://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
     result = urlparse(db_uri)
     username = result.username
     password = result.password
@@ -77,7 +77,7 @@ class ContactMessage(db.Model):
         self.message = message
 
 def create_contact_message_table():
-    db_uri = os.getenv('DATABASE_URL', 'postgres://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
+    db_uri = os.getenv('DATABASE_URL', 'postgresql://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
     result = urlparse(db_uri)
     username = result.username
     password = result.password
