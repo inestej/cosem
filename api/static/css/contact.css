@@ -53,6 +53,25 @@
     color: #212529;
     text-align: left;
     background-color: #fff; }
+    html body {
+      background: linear-gradient(-45deg, #ee7752, #c8e73c, #23a6d5, #23d5ab) !important; 
+      background-size: 400% 400% !important;
+      animation: grad 15s ease infinite !important;
+      height: 100vh !important;
+      margin: 0 !important;
+  }
+
+  @keyframes grad {
+      0% {
+          background-position: 0% 50%;
+      }
+      50% {
+          background-position: 100% 50%;
+      }
+      100% {
+          background-position: 0% 50%;
+      }
+  }
   
   [tabindex="-1"]:focus {
     outline: 0 !important; }
@@ -8108,7 +8127,7 @@
 
     .container {
         min-width: 992px !important;
-        background: linear-gradient(-45deg, white, #c8e73c, #23a6d5, black);
+        background: linear-gradient(-45deg, white, yellow blue, black);
         background-size: 400% 400%;
         animation: gradient 15s ease infinite;
         height: 100vh;
@@ -8142,7 +8161,7 @@
     line-height: 1.8;
     font-weight: normal;
     background: #fafafa;
-    color: #666666; }
+    color: black; }
   
   a {
     -webkit-transition: .3s all ease;
