@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, url_for, redirect, flash
+from flask import Flask, render_template, url_for, redirect, flash, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
@@ -206,6 +206,15 @@ def private_dashboard():
 @app.route('/public_dashboard')
 def public_dashboard():
     return render_template('public_dashboard.html')
+
+@app.route('/save_polygon', methods=['GET','POST'])
+def save_polygon():
+    data = request.json
+    coordinates = data.get('coordinates')
+    # save the coordinates to a database 
+    # we just print them
+    print('Polygon coordinates:', coordinates)
+    return jsonify({'status': 'success', 'coordinates': coordinates})
 
 if __name__ == '__main__':
     with app.app_context():

@@ -1,82 +1,170 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const cropProductionCtx = document.getElementById('cropProductionChart').getContext('2d');
-    const rainfallCtx = document.getElementById('rainfallChart').getContext('2d');
-    const soilQualityCtx = document.getElementById('soilQualityChart').getContext('2d');
+// Sample data for the bar chart
+const productionData = {
+    labels: ['Wheat', 'Rice', 'Corn', 'Soybeans', 'Barley'],
+    datasets: [{
+        label: 'Production (tons)',
+        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3', '#FF5722', '#9C27B0'],
+        data: [1200, 1900, 3000, 500, 800],
+    }]
+};
 
-    new Chart(cropProductionCtx, {
-        type: 'bar',
-        data: {
-            labels: ['Wheat', 'Rice', 'Corn', 'Barley', 'Soybeans'],
-            datasets: [{
-                label: 'Production (tons)',
-                data: [12000, 19000, 3000, 5000, 2000],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+const productionConfig = {
+    type: 'bar',
+    data: productionData,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Crop Production Statistics'
             }
         }
-    });
+    },
+};
 
-    new Chart(rainfallCtx, {
-        type: 'line',
-        data: {
-            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-            datasets: [{
-                label: 'Rainfall (mm)',
-                data: [50, 70, 100, 200, 150, 300, 250, 200, 100, 80, 60, 40],
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
-                borderColor: 'rgba(54, 162, 235, 1)',
-                borderWidth: 1,
-                fill: true
-            }]
+// Sample data for the line chart
+const trendData = {
+    labels: ['2016', '2017', '2018', '2019', '2020'],
+    datasets: [
+        {
+            label: 'Wheat',
+            borderColor: '#4CAF50',
+            data: [1000, 1100, 1200, 1300, 1400],
+            fill: false,
         },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
+        {
+            label: 'Rice',
+            borderColor: '#FFC107',
+            data: [1500, 1600, 1700, 1800, 1900],
+            fill: false,
+        },
+        {
+            label: 'Corn',
+            borderColor: '#2196F3',
+            data: [2500, 2600, 2700, 2800, 3000],
+            fill: false,
+        },
+        {
+            label: 'Soybeans',
+            borderColor: '#FF5722',
+            data: [400, 450, 500, 550, 600],
+            fill: false,
+        },
+        {
+            label: 'Barley',
+            borderColor: '#9C27B0',
+            data: [600, 650, 700, 750, 800],
+            fill: false,
+        }
+    ]
+};
+
+const trendConfig = {
+    type: 'line',
+    data: trendData,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Crop Production Trends Over Time'
             }
         }
-    });
+    },
+};
 
-    new Chart(soilQualityCtx, {
-        type: 'doughnut',
-        data: {
-            labels: ['High', 'Medium', 'Low'],
-            datasets: [{
-                label: 'Soil Quality Index',
-                data: [60, 30, 10],
-                backgroundColor: [
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(255, 99, 132, 0.2)'
-                ],
-                borderColor: [
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
+// Sample data for the pie chart
+const distributionData = {
+    labels: ['Wheat', 'Rice', 'Corn', 'Soybeans', 'Barley'],
+    datasets: [{
+        label: 'Crop Distribution',
+        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3', '#FF5722', '#9C27B0'],
+        data: [20, 30, 40, 5, 5],
+    }]
+};
+
+const distributionConfig = {
+    type: 'pie',
+    data: distributionData,
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: 'top',
+            },
+            title: {
+                display: true,
+                text: 'Crop Distribution'
+            }
+        }
+    },
+};
+
+window.onload = function() {
+    const ctxProduction = document.getElementById('productionChart').getContext('2d');
+    new Chart(ctxProduction, productionConfig);
+
+    const ctxTrend = document.getElementById('trendChart').getContext('2d');
+    new Chart(ctxTrend, trendConfig);
+
+    const ctxDistribution = document.getElementById('distributionChart').getContext('2d');
+    new Chart(ctxDistribution, distributionConfig);
+
+    // Initialize the map centered on Tunisia
+    const map = L.map('map').setView([33.8869, 9.5375], 6);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Leaflet Draw Control
+    const drawnItems = new L.FeatureGroup();
+    map.addLayer(drawnItems);
+
+    const drawControl = new L.Control.Draw({
+        edit: {
+            featureGroup: drawnItems
+        },
+        draw: {
+            polygon: true,
+            polyline: false,
+            rectangle: false,
+            circle: false,
+            marker: false,
+            circlemarker: false
         }
     });
-});
+    map.addControl(drawControl);
+
+    // Handle the creation of drawn polygons
+    map.on(L.Draw.Event.CREATED, function (event) {
+        const layer = event.layer;
+        drawnItems.addLayer(layer);
+
+        // Store the coordinates of the polygon
+        const polygonCoordinates = layer.getLatLngs();
+        console.log('Polygon coordinates:', polygonCoordinates);
+
+        // Send the coordinates to the server (Flask backend)
+        fetch('/save_polygon', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ coordinates: polygonCoordinates })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Polygon saved:', data);
+        })
+        .catch(error => {
+            console.error('Error saving polygon:', error);
+        });
+    });
+};
