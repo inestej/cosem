@@ -1,21 +1,68 @@
+.nav-button {
+    display: flex;
+    align-items: center;
+    background: linear-gradient(to right, #ff00ff, #ff9900);
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    transition: background 0.3s ease, transform 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.nav-button:hover {
+    background: linear-gradient(to right, #ff00ff, #ff9900);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    transform: scale(1.05);
+}
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.nav-icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     background-color: #f4f4f4;
     margin: 0;
     padding: 0;
     color: #333;
 }
 
-.container {
-    width: 90%;
-    margin: auto;
+.fixed-left {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.container-fluid {
+    margin-left: 200px;
 }
 
 header {
     text-align: center;
     padding: 20px 0;
-    background-color: #4CAF50;
-    color: white;
+}
+
+.jumbotron {
+    background: linear-gradient(45deg, #6a11cb, #2575fc);
 }
 
 .charts {
@@ -25,9 +72,6 @@ header {
 }
 
 .chart-container {
-    flex: 1;
-    min-width: 300px;
-    margin: 20px;
     background: white;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -49,29 +93,21 @@ header {
 }
 
 .summary {
-    margin: 20px 0;
     background: white;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.summary h2 {
-    text-align: center;
-}
+@media (max-width: 768px) {
+    .fixed-left {
+        position: relative;
+        width: 100%;
+        height: auto;
+        box-shadow: none;
+    }
 
-.summary table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-}
-
-.summary th, .summary td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: center;
-}
-
-.summary th {
-    background-color: #f2f2f2;
+    .container-fluid {
+        margin-left: 0;
+    }
 }

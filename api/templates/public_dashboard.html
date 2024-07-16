@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crop Production Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/public_dashboard.css') }}">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
@@ -12,63 +17,86 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Crop Production Dashboard</h1>
-        </header>
-        <section class="charts">
-            <div class="chart-container">
-                <canvas id="productionChart"></canvas>
+    <div class="d-flex">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light flex-column fixed-left" style="width: 200px; height: 100vh;">
+            <a class="navbar-brand" href="#">Dashboard</a>
+            <div class="navbar-nav flex-column">
+                <a class="nav-item nav-link nav-button" href="{{ url_for('home') }}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20px" height="20px">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    HOME
+                </a>
+                <a class="nav-item nav-link" href="#productionChart">Production Chart</a>
+                <a class="nav-item nav-link" href="#trendChart">Trend Chart</a>
+                <a class="nav-item nav-link" href="#distributionChart">Distribution Chart</a>
+                <a class="nav-item nav-link" href="#map">Map</a>
+                <a class="nav-item nav-link" href="#summary">Summary</a>
             </div>
-            <div class="chart-container">
-                <canvas id="trendChart"></canvas>
-            </div>
-            <div class="chart-container">
-                <canvas id="distributionChart"></canvas>
-            </div>
-        </section>
-        <section class="map-section">
-            <div id="map" class="map-container"></div>
-        </section>
-        <section class="summary">
-            <h2>Summary Statistics</h2>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Crop</th>
-                        <th>Production (tons)</th>
-                        <th>Trend (%)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Wheat</td>
-                        <td>1200</td>
-                        <td>5%</td>
-                    </tr>
-                    <tr>
-                        <td>Rice</td>
-                        <td>1900</td>
-                        <td>3%</td>
-                    </tr>
-                    <tr>
-                        <td>Corn</td>
-                        <td>3000</td>
-                        <td>7%</td>
-                    </tr>
-                    <tr>
-                        <td>Soybeans</td>
-                        <td>500</td>
-                        <td>-2%</td>
-                    </tr>
-                    <tr>
-                        <td>Barley</td>
-                        <td>800</td>
-                        <td>4%</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
+        </nav>
+        <div class="container-fluid p-4" style="margin-left: 200px;">
+            <header class="mb-4">
+                <div class="jumbotron text-white bg-gradient-primary p-4 rounded">
+                    <div class="container">
+                        <h1 class="display-4">Crop Production Dashboard</h1>
+                        <p class="lead">Visualize and analyze crop production data effectively</p>
+                    </div>
+                </div>
+            </header>
+            <section class="charts row">
+                <div class="chart-container col-lg-4 mb-4">
+                    <canvas id="productionChart"></canvas>
+                </div>
+                <div class="chart-container col-lg-4 mb-4">
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="chart-container col-lg-4 mb-4">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </section>
+            <section class="map-section mb-4">
+                <div id="map" class="map-container"></div>
+            </section>
+            <section class="summary">
+                <h2 class="text-center">Summary Statistics</h2>
+                <table class="table table-bordered table-striped">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Crop</th>
+                            <th>Production (tons)</th>
+                            <th>Trend (%)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Wheat</td>
+                            <td>1200</td>
+                            <td>5%</td>
+                        </tr>
+                        <tr>
+                            <td>Rice</td>
+                            <td>1900</td>
+                            <td>3%</td>
+                        </tr>
+                        <tr>
+                            <td>Corn</td>
+                            <td>3000</td>
+                            <td>7%</td>
+                        </tr>
+                        <tr>
+                            <td>Soybeans</td>
+                            <td>500</td>
+                            <td>-2%</td>
+                        </tr>
+                        <tr>
+                            <td>Barley</td>
+                            <td>800</td>
+                            <td>4%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
     </div>
     <script src="{{ url_for('static', filename='js/public_dashboard.js') }}"></script>
 </body>

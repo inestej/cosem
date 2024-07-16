@@ -148,7 +148,7 @@ window.onload = function() {
         drawnItems.addLayer(layer);
 
         // Store the coordinates of the polygon
-        const polygonCoordinates = layer.getLatLngs();
+        const polygonCoordinates = layer.getLatLngs()[0].map(coord => [coord.lat, coord.lng]);
         console.log('Polygon coordinates:', polygonCoordinates);
 
         // Send the coordinates to the server (Flask backend)
@@ -162,9 +162,15 @@ window.onload = function() {
         .then(response => response.json())
         .then(data => {
             console.log('Polygon saved:', data);
+            if (data.status === 'success') {
+                alert('Polygon has been successfully registered!');
+            } else {
+                alert('Failed to register the polygon. Please try again.');
+            }
         })
         .catch(error => {
             console.error('Error saving polygon:', error);
+            alert('An error occurred while saving the polygon. Please try again.');
         });
     });
 };

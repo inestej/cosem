@@ -140,6 +140,42 @@ class ContactForm(FlaskForm):
     subject = TextAreaField('Subject', validators=[InputRequired(), Length(min=1)])
     message = TextAreaField('Message', validators=[InputRequired(), Length(min=1)])
     submit = SubmitField('Submit')
+    
+class Polygon(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    coordinates = db.Column(db.Text, nullable=False)
+
+    def __init__(self, coordinates):
+        self.coordinates = coordinates
+
+def create_polygon_table():
+    db_uri = os.getenv('DATABASE_URL', 'postgresql://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
+    result = urlparse(db_uri)
+    username = result.username
+    password = result.password
+    database = result.path[1:]
+    hostname = result.hostname
+    port = result.port
+
+    conn = psycopg2.connect(database=database,
+                            host=hostname,
+                            user=username,
+                            password=password,
+                            port=port)
+    cursor = conn.cursor()
+    cursor.execute("""
+    CREATE TABLE IF NOT EXISTS "polygon" (
+        id SERIAL PRIMARY KEY,
+        coordinates TEXT NOT NULL
+    )
+    """)
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+# Create the polygon table before starting the app
+create_polygon_table()
+    
 
 @app.route('/')
 def home():
@@ -207,14 +243,20 @@ def private_dashboard():
 def public_dashboard():
     return render_template('public_dashboard.html')
 
-@app.route('/save_polygon', methods=['GET','POST'])
+@app.route('/save_polygon', methods=['POST'])
 def save_polygon():
     data = request.json
     coordinates = data.get('coordinates')
-    # save the coordinates to a database 
-    # we just print them
-    print('Polygon coordinates:', coordinates)
-    return jsonify({'status': 'success', 'coordinates': coordinates})
+
+    if coordinates:
+        # Save the coordinates to the database
+        polygon = Polygon(coordinates=str(coordinates))
+        db.session.add(polygon)
+        db.session.commit()
+
+        return jsonify({'status': 'success', 'coordinates': coordinates})
+    else:
+        return jsonify({'status': 'error', 'message': 'No coordinates provided'})
 
 if __name__ == '__main__':
     with app.app_context():
