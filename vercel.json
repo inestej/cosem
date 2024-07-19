@@ -2,20 +2,32 @@
   "version": 2,
   "builds": [
     {
-      "src": "api/index.py",
-      "use": "@vercel/python"
+      "src": "api/app.py",
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9"
+      }
     },
     {
       "src": "dash_app/map.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9"
+      }
     },
     {
       "src": "dash_app/hist.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9"
+      }
     },
     {
       "src": "dash_app/bar_chart.py",
-      "use": "@vercel/python"
+      "use": "@vercel/python",
+      "config": {
+        "runtime": "python3.9"
+      }
     }
   ],
   "routes": [
