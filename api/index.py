@@ -282,7 +282,6 @@ def Creation_map():
             return 'Unknown'
 
     ext.loc[:, 'cereale_text'] = ext['code_cereale'].apply(map_code_to_text)
-    
     # Convert GeoDataFrame to GeoJSON
     geojson = ext.__geo_interface__
 
