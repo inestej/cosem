@@ -9,16 +9,8 @@ from flask_bcrypt import Bcrypt
 from flask_migrate import Migrate
 import psycopg2
 from urllib.parse import urlparse
-import requests
-import matplotlib.pyplot as plt
-import geopandas as gpd
-import random
-import numpy as np
-import plotly.express as px
-import dash
-from dash import dcc, html
-import pandas as pd
-import plotly.graph_objects as go
+
+
 
 app = Flask(__name__, template_folder="templates")
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'thisisasecretkey')
@@ -243,157 +235,8 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-# Function to fetch GeoJSON data
-def fetch_geojson_data():
-    url = 'http://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson'
-    response = requests.get(url)
-    data = response.json()
-    return gpd.GeoDataFrame.from_features(data)
 
-def Creation_map():
-    # Filter by governorates
-    governorates = ['Manubah', 'Bizerte', 'Zaghouan', 'Siliana', 'Ben Arous', 'Béja', 'Jendouba', 'Le Kef', 'Ariana']
-    ext = fetch_geojson_data()[fetch_geojson_data()['gov_name_f'].isin(governorates)]
 
-    # Generate random values
-    random.seed(42)
-    cereale_codes = [random.randint(1, 4) for _ in range(len(ext))]
-    variete_codes = [random.randint(1, 12) for _ in range(len(ext))]
-    superficies = [random.randint(10, 100) for _ in range(len(ext))]
-    productions = [random.randint(20, 5000) for _ in range(len(ext))]
-
-    # Add new columns
-    ext.loc[:, 'code_cereale'] = cereale_codes
-    ext.loc[:, 'code_variete'] = variete_codes
-    ext.loc[:, 'superficie'] = superficies
-    ext.loc[:, 'production'] = productions
-
-    # Map code to text
-    def map_code_to_text(code):
-        if code == 1:
-            return 'BD'
-        elif code == 2:
-            return 'BT'
-        elif code == 3:
-            return 'Tr'
-        elif code == 4:
-            return 'Or'
-        else:
-            return 'Unknown'
-
-    ext.loc[:, 'cereale_text'] = ext['code_cereale'].apply(map_code_to_text)
-    # Convert GeoDataFrame to GeoJSON
-    geojson = ext.__geo_interface__
-
-    # Create the choropleth map with Plotly
-    fig = px.choropleth(
-        ext,
-        geojson=geojson,
-        locations=ext.index,
-        color='production',
-        color_continuous_scale='YlGn',
-        hover_data={'cereale_text': True, 'production': True },
-        labels={'production': 'Production', 'cereale_text': 'Cereale Type'},
-        hover_name='gov_name_f', 
-        title='Map of Production by Governorate - Simulated Data',
-        height=895
-    )
-
-    fig.update_geos(fitbounds="locations", visible=False)
-    fig.update_layout(
-        mapbox_style="carto-positron",
-        mapbox_zoom=7,
-        mapbox_center={"lat": 34.0, "lon": 9.0},
-        margin={"r":0,"t":60,"l":0,"b":0},
-        coloraxis_colorbar={
-            'title': 'Production',
-            'tickvals': [min(productions), max(productions)],
-            'ticktext': [min(productions), max(productions)],
-            'x': 1.05,  # Positioning the color bar
-            'xanchor': 'left',
-            'y': 0.5,
-            'yanchor': 'middle'
-        }
-    )
-
-    return fig
-
-def histogram():
-    # Read the CSV file
-    cereal_data = pd.read_csv('cereal_data.csv')
-    
-    # Group the data by governorate and sum the cereal quantities
-    governorate_data = cereal_data.groupby('gov_name_f_y')[['BD', 'BT', 'Tr', 'Or']].sum().reset_index()
-
-    # Melt the DataFrame to long format for easier plotting
-    governorate_data_melted = pd.melt(governorate_data, id_vars='gov_name_f_y', var_name='Cereal', value_name='Quantity')
-
-    # Create the bar plot using Plotly
-    fig = px.bar(governorate_data_melted, 
-                x='gov_name_f_y', 
-                y='Quantity', 
-                color='Cereal', 
-                title='Cereal Production by Governorate - simulated data',
-                labels={'gov_name_f_y': 'Governorate', 'Quantity': 'Total Quantity'},
-                barmode='group')
-
-    # Update layout for better readability
-    fig.update_layout(xaxis_tickangle=-45, xaxis_title='Governorate', yaxis_title='Total Quantity')
-    
-    return fig
-def bar_chart():
-    cereal_data = pd.read_csv('cereal_data.csv')
-    # Group the data by governorate and sum the relevant columns
-    governorate_data = cereal_data.groupby('gov_name_f_y')[['superficie', 'BD', 'BT', 'Tr', 'Or']].sum().reset_index()
-
-    # Define the colors for the cereals
-    colors = ['#440154', '#3b528b', '#21908d', '#5dc863']  # Example colors from Viridis
-
-    # Create the Plotly figure
-    fig = go.Figure()
-
-    # Add traces for each cereal
-    cereals = ['BD', 'BT', 'Tr', 'Or']
-    for i, cereal in enumerate(cereals):
-        fig.add_trace(go.Bar(
-            x=governorate_data['gov_name_f_y'],
-            y=governorate_data[cereal],
-            name=cereal,
-            marker_color=colors[i]
-        ))
-
-    # Update layout for better readability
-    fig.update_layout(
-        title='Cereal Production as Proportion of Area by Governorate - simulated data',
-        xaxis_title='Governorate',
-        yaxis_title='Superficie',
-        barmode='stack',
-        xaxis_tickangle=-45,
-        showlegend=True,
-        plot_bgcolor='white'  # Change the background color to white
-    )
-    
-    return fig
-    
-# Create a Dash application
-map = dash.Dash(__name__, server=app, url_base_pathname='/tunisia_map/')
-hist = dash.Dash(__name__, server=app, url_base_pathname='/hist/')
-BarChart = dash.Dash(__name__, server=app, url_base_pathname='/bar_chart/')
-
-# Define the layout of the map
-map.layout = html.Div([
-    dcc.Graph(id='map', figure=Creation_map())
-])
-
-# Define the layout of the histograme
-hist.layout = html.Div([
-    dcc.Graph(id='hist', figure=histogram())
-])
-
-# Define the layout of the bar chart
-BarChart.layout = html.Div([
-    dcc.Graph(id='bar', figure=bar_chart())
-])    
 
 @app.route('/private_dashboard')
 @login_required
