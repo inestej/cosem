@@ -1,65 +1,52 @@
-async function fetchGeojsonData() {
-    const url = 'http://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson';
+async function fetchData(url) {
     const response = await fetch(url);
     const data = await response.json();
     return data;
 }
 
-function mapCodeToText(code) {
-    switch (code) {
-        case 1: return 'BD';
-        case 2: return 'BT';
-        case 3: return 'Tr';
-        case 4: return 'Or';
-        default: return 'Unknown';
-    }
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-async function createMap() {
-    const governorates = ['Manubah', 'Bizerte', 'Zaghouan', 'Siliana', 'Ben Arous', 'Béja', 'Jendouba', 'Le Kef', 'Ariana'];
-    const data = await fetchGeojsonData();
-    const features = data.features.filter(feature => governorates.includes(feature.properties.gov_name_f));
-    
-    // Generate random values
-    const randomSeed = 42;
-    Math.seedrandom(randomSeed);
-    const cerealeCodes = features.map(() => Math.floor(Math.random() * 4) + 1);
-    const varieteCodes = features.map(() => Math.floor(Math.random() * 12) + 1);
-    const superficies = features.map(() => Math.floor(Math.random() * 91) + 10);
-    const productions = features.map(() => Math.floor(Math.random() * 4981) + 20);
+function mapCodeToText(code) {
+    if (code === 1) return 'BD';
+    if (code === 2) return 'BT';
+    if (code === 3) return 'Tr';
+    if (code === 4) return 'Or';
+    return 'Unknown';
+}
 
-    // Add new properties
-    features.forEach((feature, index) => {
-        feature.properties.code_cereale = cerealeCodes[index];
-        feature.properties.code_variete = varieteCodes[index];
-        feature.properties.superficie = superficies[index];
-        feature.properties.production = productions[index];
-        feature.properties.cereale_text = mapCodeToText(cerealeCodes[index]);
+async function createChoropleth() {
+    const url = 'http://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson';
+    const data = await fetchData(url);
+
+    const governorates = ['Manubah', 'Bizerte', 'Zaghouan', 'Siliana', 'Ben Arous', 'Béja', 'Jendouba', 'Le Kef', 'Ariana'];
+
+    const features = data.features.filter(feature => governorates.includes(feature.properties.gov_name_f));
+
+    features.forEach(feature => {
+        feature.properties.code_cereale = getRandomInt(1, 4);
+        feature.properties.code_variete = getRandomInt(1, 12);
+        feature.properties.superficie = getRandomInt(10, 100);
+        feature.properties.production = getRandomInt(20, 5000);
+        feature.properties.cereale_text = mapCodeToText(feature.properties.code_cereale);
     });
 
-    const geojson = {
-        type: 'FeatureCollection',
-        features: features
-    };
-
-    const dataTrace = {
+    const mapData = [{
         type: 'choropleth',
-        geojson: geojson,
-        locations: features.map((_, index) => index),
-        z: features.map(feature => feature.properties.production),
+        geojson: data,
+        locations: features.map(feature => feature.id),
+        z: features.map(feature => feature.properties.code_cereale),
+        text: features.map(feature => `${feature.properties.gov_name_f}: ${feature.properties.cereale_text}`),
         colorscale: 'YlGn',
-        text: features.map(feature => `Cereale Type: ${feature.properties.cereale_text}<br>Production: ${feature.properties.production}`),
-        hoverinfo: 'text',
-        colorbar: {
-            title: 'Production',
-            tickvals: [Math.min(...productions), Math.max(...productions)],
-            ticktext: [Math.min(...productions), Math.max(...productions)],
-            x: 1.05,
-            xanchor: 'left',
-            y: 0.5,
-            yanchor: 'middle'
-        }
-    };
+        marker: {
+            line: {
+                width: 0.5,
+                color: 'rgba(0,0,0,0.5)'
+            }
+        },
+        hoverinfo: 'location+z+text'
+    }];
 
     const layout = {
         title: 'Map of Production by Governorate - Simulated Data',
@@ -75,11 +62,10 @@ async function createMap() {
         margin: { r: 0, t: 60, l: 0, b: 0 }
     };
 
-    Plotly.newPlot('map', [dataTrace], layout);
+    Plotly.newPlot('maptn', mapData, layout);
 }
 
-// Call the createMap function to render the map
-createMap();
+createChoropleth()
 
 async function createHistogram() {
     // Load the CSV file
@@ -102,40 +88,38 @@ async function createHistogram() {
         governorateData[row.gov_name_f_y].Or += parseFloat(row.Or);
     });
 
-    // Debugging: log the grouped data
-    console.log(governorateData);
+    const governorates = Object.keys(governorateData);
 
-    const governorateDataMelted = [];
-    Object.keys(governorateData).forEach(governorate => {
-        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'BD', Quantity: governorateData[governorate].BD });
-        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'BT', Quantity: governorateData[governorate].BT });
-        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'Tr', Quantity: governorateData[governorate].Tr });
-        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'Or', Quantity: governorateData[governorate].Or });
-    });
-
-    // Debugging: log the melted data
-    console.log(governorateDataMelted);
-
-    // Create the bar chart
-    const trace = {
-        x: governorateDataMelted.map(item => item.gov_name_f_y),
-        y: governorateDataMelted.map(item => item.Quantity),
-        type: 'bar',
-        text: governorateDataMelted.map(item => item.Cereal),
-        hoverinfo: 'x+y+text',
-        name: 'Cereal Production',
-        marker: {
-            color: governorateDataMelted.map(item => {
-                switch (item.Cereal) {
-                    case 'BD': return '#440154';
-                    case 'BT': return '#3b528b';
-                    case 'Tr': return '#21908d';
-                    case 'Or': return '#5dc863';
-                    default: return '#000000';
-                }
-            })
-        }
+    // Separate the data by cereal type
+    const bdData = {
+        x: governorates,
+        y: governorates.map(gov => governorateData[gov].BD),
+        name: 'BD',
+        type: 'bar'
     };
+
+    const btData = {
+        x: governorates,
+        y: governorates.map(gov => governorateData[gov].BT),
+        name: 'BT',
+        type: 'bar'
+    };
+
+    const trData = {
+        x: governorates,
+        y: governorates.map(gov => governorateData[gov].Tr),
+        name: 'Tr',
+        type: 'bar'
+    };
+
+    const orData = {
+        x: governorates,
+        y: governorates.map(gov => governorateData[gov].Or),
+        name: 'Or',
+        type: 'bar'
+    };
+
+    const data = [bdData, btData, trData, orData];
 
     const layout = {
         title: 'Cereal Production by Governorate - Simulated Data',
@@ -145,8 +129,12 @@ async function createHistogram() {
         plot_bgcolor: 'white'
     };
 
-    Plotly.newPlot('histogram', [trace], layout);
+    Plotly.newPlot('histogram', data, layout);
 }
+
+// Invoke the async function to create the histogram
+createHistogram();
+
 
 // Call the createHistogram function to render the histogram
 createHistogram();
@@ -204,15 +192,6 @@ createBarChart();
 
 
 window.onload = function() {
-    const ctxProduction = document.getElementById('productionChart').getContext('2d');
-    new Chart(ctxProduction, productionConfig);
-
-    const ctxTrend = document.getElementById('trendChart').getContext('2d');
-    new Chart(ctxTrend, trendConfig);
-
-    const ctxDistribution = document.getElementById('distributionChart').getContext('2d');
-    new Chart(ctxDistribution, distributionConfig);
-
     // Initialize the map centered on Tunisia
     const map = L.map('map').setView([33.8869, 9.5375], 6);
 

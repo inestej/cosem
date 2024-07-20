@@ -34,7 +34,7 @@ class User(db.Model, UserMixin):
 # Function to create the user table if it doesn't exist
 def create_user_table():
     db_uri = os.getenv('DATABASE_URL', 'postgresql://default:3zdkqlyXc9ZB@ep-spring-thunder-a44g23e4.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require')
-    result = urlparse(db_uri)
+    result = urlparse(db_uri)   
     username = result.username
     password = result.password
     database = result.path[1:]
@@ -203,7 +203,7 @@ def contact():
 def thnx_for_submit():
     return render_template('thnx_for_submit.html')
 
-@app.route('/login', methods=['GET', 'POST'])
+@app.route('/login', methods=['GET', 'POST'])  
 def login():
     form = LoginForm()
     error = None

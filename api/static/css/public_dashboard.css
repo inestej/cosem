@@ -70,6 +70,35 @@ header {
     justify-content: space-around;
     flex-wrap: wrap;
 }
+.charts {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 2fr; /* Adjust row heights */
+    gap: 16px; /* Adjust the gap as needed */
+    min-height: 600px; /* Adjust the minimum height as needed */
+}
+
+.histogram {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+}
+
+.barchart {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+}
+
+.maptn {
+    grid-column: 2 / 3;
+    grid-row: 1 / 3;
+}
+
+.chart-container {
+    border: 1px solid #ccc; /* Optional styling for better visualization */
+    padding: 16px; /* Adjust padding as needed */
+    background-color: #f9f9f9; /* Optional background color */
+    min-height: 300px; /* Minimum height for each container */
+}
 
 .chart-container {
     background: white;
