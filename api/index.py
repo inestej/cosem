@@ -235,7 +235,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/private_dashboard')
-@login_required
+@login_required 
 def private_dashboard():
     return render_template('private_dashboard.html')
 
@@ -261,4 +261,4 @@ def save_polygon():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run()
+    app.run(debug=True,port=8009)

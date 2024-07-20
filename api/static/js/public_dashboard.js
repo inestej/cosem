@@ -1,110 +1,207 @@
-// Sample data for the bar chart
-const productionData = {
-    labels: ['Wheat', 'Rice', 'Corn', 'Soybeans', 'Barley'],
-    datasets: [{
-        label: 'Production (tons)',
-        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3', '#FF5722', '#9C27B0'],
-        data: [1200, 1900, 3000, 500, 800],
-    }]
-};
+async function fetchGeojsonData() {
+    const url = 'http://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson';
+    const response = await fetch(url);
+    const data = await response.json();
+    return data;
+}
 
-const productionConfig = {
-    type: 'bar',
-    data: productionData,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Crop Production Statistics'
-            }
+function mapCodeToText(code) {
+    switch (code) {
+        case 1: return 'BD';
+        case 2: return 'BT';
+        case 3: return 'Tr';
+        case 4: return 'Or';
+        default: return 'Unknown';
+    }
+}
+
+async function createMap() {
+    const governorates = ['Manubah', 'Bizerte', 'Zaghouan', 'Siliana', 'Ben Arous', 'Béja', 'Jendouba', 'Le Kef', 'Ariana'];
+    const data = await fetchGeojsonData();
+    const features = data.features.filter(feature => governorates.includes(feature.properties.gov_name_f));
+    
+    // Generate random values
+    const randomSeed = 42;
+    Math.seedrandom(randomSeed);
+    const cerealeCodes = features.map(() => Math.floor(Math.random() * 4) + 1);
+    const varieteCodes = features.map(() => Math.floor(Math.random() * 12) + 1);
+    const superficies = features.map(() => Math.floor(Math.random() * 91) + 10);
+    const productions = features.map(() => Math.floor(Math.random() * 4981) + 20);
+
+    // Add new properties
+    features.forEach((feature, index) => {
+        feature.properties.code_cereale = cerealeCodes[index];
+        feature.properties.code_variete = varieteCodes[index];
+        feature.properties.superficie = superficies[index];
+        feature.properties.production = productions[index];
+        feature.properties.cereale_text = mapCodeToText(cerealeCodes[index]);
+    });
+
+    const geojson = {
+        type: 'FeatureCollection',
+        features: features
+    };
+
+    const dataTrace = {
+        type: 'choropleth',
+        geojson: geojson,
+        locations: features.map((_, index) => index),
+        z: features.map(feature => feature.properties.production),
+        colorscale: 'YlGn',
+        text: features.map(feature => `Cereale Type: ${feature.properties.cereale_text}<br>Production: ${feature.properties.production}`),
+        hoverinfo: 'text',
+        colorbar: {
+            title: 'Production',
+            tickvals: [Math.min(...productions), Math.max(...productions)],
+            ticktext: [Math.min(...productions), Math.max(...productions)],
+            x: 1.05,
+            xanchor: 'left',
+            y: 0.5,
+            yanchor: 'middle'
         }
-    },
-};
+    };
 
-// Sample data for the line chart
-const trendData = {
-    labels: ['2016', '2017', '2018', '2019', '2020'],
-    datasets: [
-        {
-            label: 'Wheat',
-            borderColor: '#4CAF50',
-            data: [1000, 1100, 1200, 1300, 1400],
-            fill: false,
+    const layout = {
+        title: 'Map of Production by Governorate - Simulated Data',
+        geo: {
+            fitbounds: 'locations',
+            visible: false
         },
-        {
-            label: 'Rice',
-            borderColor: '#FFC107',
-            data: [1500, 1600, 1700, 1800, 1900],
-            fill: false,
+        mapbox: {
+            style: 'carto-positron',
+            zoom: 7,
+            center: { lat: 34.0, lon: 9.0 }
         },
-        {
-            label: 'Corn',
-            borderColor: '#2196F3',
-            data: [2500, 2600, 2700, 2800, 3000],
-            fill: false,
-        },
-        {
-            label: 'Soybeans',
-            borderColor: '#FF5722',
-            data: [400, 450, 500, 550, 600],
-            fill: false,
-        },
-        {
-            label: 'Barley',
-            borderColor: '#9C27B0',
-            data: [600, 650, 700, 750, 800],
-            fill: false,
+        margin: { r: 0, t: 60, l: 0, b: 0 }
+    };
+
+    Plotly.newPlot('map', [dataTrace], layout);
+}
+
+// Call the createMap function to render the map
+createMap();
+
+async function createHistogram() {
+    // Load the CSV file
+    const response = await fetch('static/cereal_data.csv');
+    const dataText = await response.text();
+    const cerealData = Papa.parse(dataText, { header: true }).data;
+
+    // Debugging: log the loaded data
+    console.log(cerealData);
+
+    // Group data by governorate and sum the quantities of each cereal
+    const governorateData = {};
+    cerealData.forEach(row => {
+        if (!governorateData[row.gov_name_f_y]) {
+            governorateData[row.gov_name_f_y] = { BD: 0, BT: 0, Tr: 0, Or: 0 };
         }
-    ]
-};
+        governorateData[row.gov_name_f_y].BD += parseFloat(row.BD);
+        governorateData[row.gov_name_f_y].BT += parseFloat(row.BT);
+        governorateData[row.gov_name_f_y].Tr += parseFloat(row.Tr);
+        governorateData[row.gov_name_f_y].Or += parseFloat(row.Or);
+    });
 
-const trendConfig = {
-    type: 'line',
-    data: trendData,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Crop Production Trends Over Time'
-            }
+    // Debugging: log the grouped data
+    console.log(governorateData);
+
+    const governorateDataMelted = [];
+    Object.keys(governorateData).forEach(governorate => {
+        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'BD', Quantity: governorateData[governorate].BD });
+        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'BT', Quantity: governorateData[governorate].BT });
+        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'Tr', Quantity: governorateData[governorate].Tr });
+        governorateDataMelted.push({ gov_name_f_y: governorate, Cereal: 'Or', Quantity: governorateData[governorate].Or });
+    });
+
+    // Debugging: log the melted data
+    console.log(governorateDataMelted);
+
+    // Create the bar chart
+    const trace = {
+        x: governorateDataMelted.map(item => item.gov_name_f_y),
+        y: governorateDataMelted.map(item => item.Quantity),
+        type: 'bar',
+        text: governorateDataMelted.map(item => item.Cereal),
+        hoverinfo: 'x+y+text',
+        name: 'Cereal Production',
+        marker: {
+            color: governorateDataMelted.map(item => {
+                switch (item.Cereal) {
+                    case 'BD': return '#440154';
+                    case 'BT': return '#3b528b';
+                    case 'Tr': return '#21908d';
+                    case 'Or': return '#5dc863';
+                    default: return '#000000';
+                }
+            })
         }
-    },
-};
+    };
 
-// Sample data for the pie chart
-const distributionData = {
-    labels: ['Wheat', 'Rice', 'Corn', 'Soybeans', 'Barley'],
-    datasets: [{
-        label: 'Crop Distribution',
-        backgroundColor: ['#4CAF50', '#FFC107', '#2196F3', '#FF5722', '#9C27B0'],
-        data: [20, 30, 40, 5, 5],
-    }]
-};
+    const layout = {
+        title: 'Cereal Production by Governorate - Simulated Data',
+        xaxis: { title: 'Governorate', tickangle: -45 },
+        yaxis: { title: 'Total Quantity' },
+        barmode: 'group',
+        plot_bgcolor: 'white'
+    };
 
-const distributionConfig = {
-    type: 'pie',
-    data: distributionData,
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            },
-            title: {
-                display: true,
-                text: 'Crop Distribution'
-            }
+    Plotly.newPlot('histogram', [trace], layout);
+}
+
+// Call the createHistogram function to render the histogram
+createHistogram();
+
+async function createBarChart() {
+    // Load the CSV file
+    const response = await fetch('static/cereal_data.csv');
+    const dataText = await response.text();
+    const cerealData = Papa.parse(dataText, { header: true }).data;
+
+    // Debugging: log the loaded data
+    console.log(cerealData);
+
+    // Group data by governorate and sum the quantities and superficie
+    const governorateData = {};
+    cerealData.forEach(row => {
+        if (!governorateData[row.gov_name_f_y]) {
+            governorateData[row.gov_name_f_y] = { superficie: 0, BD: 0, BT: 0, Tr: 0, Or: 0 };
         }
-    },
-};
+        governorateData[row.gov_name_f_y].superficie += parseFloat(row.superficie);
+        governorateData[row.gov_name_f_y].BD += parseFloat(row.BD);
+        governorateData[row.gov_name_f_y].BT += parseFloat(row.BT);
+        governorateData[row.gov_name_f_y].Tr += parseFloat(row.Tr);
+        governorateData[row.gov_name_f_y].Or += parseFloat(row.Or);
+    });
+
+    // Debugging: log the grouped data
+    console.log(governorateData);
+
+    // Create the stacked bar chart
+    const cereals = ['BD', 'BT', 'Tr', 'Or'];
+    const colors = ['#440154', '#3b528b', '#21908d', '#5dc863'];
+    const traces = cereals.map((cereal, i) => ({
+        x: Object.keys(governorateData),
+        y: Object.values(governorateData).map(data => data[cereal]),
+        name: cereal,
+        type: 'bar',
+        marker: { color: colors[i] }
+    }));
+
+    const layout = {
+        title: 'Cereal Production as Proportion of Area by Governorate - Simulated Data',
+        xaxis: { title: 'Governorate', tickangle: -45 },
+        yaxis: { title: 'Superficie' },
+        barmode: 'stack',
+        showlegend: true,
+        plot_bgcolor: 'white'
+    };
+
+    Plotly.newPlot('barchart', traces, layout);
+}
+
+// Call the createBarChart function to render the bar chart
+createBarChart();
+
 
 window.onload = function() {
     const ctxProduction = document.getElementById('productionChart').getContext('2d');
