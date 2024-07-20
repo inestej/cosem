@@ -10,8 +10,6 @@ from flask_migrate import Migrate
 import psycopg2
 from urllib.parse import urlparse
 
-
-
 app = Flask(__name__, template_folder="templates")
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'thisisasecretkey')
 bcrypt = Bcrypt(app)
@@ -177,6 +175,7 @@ def create_polygon_table():
 
 # Create the polygon table before starting the app
 create_polygon_table()
+    
 
 @app.route('/')
 def home():
@@ -235,9 +234,6 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-
-
-
 @app.route('/private_dashboard')
 @login_required
 def private_dashboard():
@@ -245,8 +241,7 @@ def private_dashboard():
 
 @app.route('/public_dashboard')
 def public_dashboard():
-    dash_urls = ['/tunisia_map/', '/hist/','/bar_chart/']
-    return render_template('public_dashboard.html', dash_urls=dash_urls)
+    return render_template('public_dashboard.html')
 
 @app.route('/save_polygon', methods=['POST'])
 def save_polygon():
@@ -266,4 +261,4 @@ def save_polygon():
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
-    app.run(debug=True)
+    app.run()

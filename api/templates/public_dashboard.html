@@ -15,66 +15,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 </head>
 <body>
     <div class="d-flex">
-        <div class="navigation">
-        <ul>
-            <li>
-                <a href="{{ url_for('home') }}">
-                    <span class="icon_logo"><img src="https://i.postimg.cc/1zZg1sp0/cosem-logo-removebg-preview.png" alt="" width="50" height="40"></span>
-                    <span class="title">Cosem</span>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light flex-column fixed-left" style="width: 200px; height: 100vh;">
+            <a class="navbar-brand" href="#">Dashboard</a>
+            <div class="navbar-nav flex-column">
+                <a class="nav-item nav-link nav-button" href="{{ url_for('home') }}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="20px" height="20px">
+                        <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                    </svg>
+                    HOME
                 </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title">Dashboard</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="person-outline"></ion-icon></span>
-                    <span class="title">Customer</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="chatbubble-outline"></ion-icon></span>
-                    <span class="title">Messages</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="help-outline"></ion-icon></span>
-                    <span class="title">Help</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                    <span class="title">Setting</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="lock-closed-outline"></ion-icon></span>
-                    <span class="title">Password</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                    <span class="title">Sign Out</span>
-                </a>
-            </li>
-        </ul>
-        <div class="toggle"></div>
-    </div>
-         <div class="container-fluid p-4" style="margin-left: 200px;">
+                <a class="nav-item nav-link" href="#productionChart">Production Chart</a>
+                <a class="nav-item nav-link" href="#trendChart">Trend Chart</a>
+                <a class="nav-item nav-link" href="#distributionChart">Distribution Chart</a>
+                <a class="nav-item nav-link" href="#map">Map</a>
+                <a class="nav-item nav-link" href="#summary">Summary</a>
+            </div>
+        </nav>
+        <div class="container-fluid p-4" style="margin-left: 200px;">
             <header class="mb-4">
                 <div class="jumbotron text-white bg-gradient-primary p-4 rounded">
                     <div class="container">
@@ -84,16 +44,14 @@
                 </div>
             </header>
             <section class="charts row">
-                <div class="grid-container">
-                    <div class="chart-container">
-                        <iframe src="{{ dash_urls[1] }}"></iframe>
-                    </div>
-                    <div class="chart-container">
-                        <iframe src="{{ dash_urls[2] }}"  ></iframe>
-                    </div>
-                    <div class="chart-container large-chart">
-                        <iframe src="{{ dash_urls[0] }}"></iframe>
-                    </div>
+                <div class="chart-container col-lg-4 mb-4">
+                    <canvas id="productionChart"></canvas>
+                </div>
+                <div class="chart-container col-lg-4 mb-4">
+                    <canvas id="trendChart"></canvas>
+                </div>
+                <div class="chart-container col-lg-4 mb-4">
+                    <canvas id="distributionChart"></canvas>
                 </div>
             </section>
             <section class="map-section mb-4">
@@ -140,11 +98,6 @@
             </section>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script src="{{ url_for('static', filename='js/public_dashboard.js') }}"></script>
 </body>
 </html>

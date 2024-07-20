@@ -1,40 +1,5 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "api/app.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.9"
-      }
-    },
-    {
-      "src": "dash_app/map.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.9"
-      }
-    },
-    {
-      "src": "dash_app/hist.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.9"
-      }
-    },
-    {
-      "src": "dash_app/bar_chart.py",
-      "use": "@vercel/python",
-      "config": {
-        "runtime": "python3.9"
-      }
-    }
-  ],
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/app.py" },
-    { "src": "/tunisia_map/(.*)", "dest": "/dash_app/map.py" },
-    { "src": "/hist/(.*)", "dest": "/dash_app/hist.py" },
-    { "src": "/bar_chart/(.*)", "dest": "/dash_app/bar_chart.py" },
-    { "src": "/(.*)", "dest": "/api/app.py" }  
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/api/index" }
   ]
 }
