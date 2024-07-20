@@ -36,7 +36,7 @@ async function createChoropleth() {
         type: 'choropleth',
         geojson: data,
         locations: features.map(feature => feature.id),
-        z: features.map(feature => feature.properties.code_cereale),
+        z: features.map(feature => feature.properties.production),
         text: features.map(feature => `${feature.properties.gov_name_f}: ${feature.properties.cereale_text}`),
         colorscale: 'YlGn',
         marker: {
