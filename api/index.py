@@ -258,6 +258,74 @@ def save_polygon():
     else:
         return jsonify({'status': 'error', 'message': 'No coordinates provided'})
 
+
+@app.route('/fr')
+def home_fr():
+    return render_template('home_fr.html')
+
+@app.route('/contact_fr', methods=['GET', 'POST'])
+def contact_fr():
+    form = ContactForm()
+    if form.validate_on_submit():
+        name = form.name.data
+        email = form.email.data
+        subject = form.subject.data
+        message = form.message.data
+
+        # Create a new contact message
+        new_message = ContactMessage(name=name, email=email, subject=subject, message=message)
+        db.session.add(new_message)
+        db.session.commit()
+
+        flash('Thank you for submitting your message!')
+        return redirect(url_for('thnx_for_submit'))
+    return render_template('contact_fr.html', form=form)
+
+@app.route('/merci')
+def thnx_for_submit_fr():
+    return render_template('thnx_for_submit_fr.html')
+
+@app.route('/login_fr', methods=['GET', 'POST'])  
+def login_fr():
+    form = LoginForm()
+    error = None
+    if form.validate_on_submit():
+        user = User.query.filter_by(username=form.username.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=True)
+            return redirect(url_for('private_dashboard_fr'))
+        else:
+            error = 'Invalid username or password. Please try again.'
+    return render_template('login_fr.html', form=form, error=error)
+
+@app.route('/logout_fr')
+@login_required
+def logout_fr():
+    logout_user()
+    return redirect(url_for('login_fr'))
+
+@app.route('/register_fr', methods=['GET', 'POST'])
+def register_fr():
+    form = RegisterForm()
+    if form.validate_on_submit():
+        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+        new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
+        db.session.add(new_user)
+        db.session.commit()
+        flash('Registration Successful! Please log in.', 'success')
+        return redirect(url_for('login_fr'))
+    return render_template('register_fr.html', form=form)
+
+@app.route('/private_dashboard_fr')
+@login_required 
+def private_dashboard_fr():
+    return render_template('private_dashboard_fr.html')
+
+@app.route('/public_dashboard_fr')
+def public_dashboard_fr():
+    return render_template('public_dashboard_fr.html')
+
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
