@@ -173,7 +173,7 @@ async function createHistogram() {
         plot_bgcolor: 'white'
     };
 
-    Plotly.newPlot('histogram', data, layout);
+    Plotly.newPlot('histogramtn', data, layout);
 }
 
 // Invoke the async function to create the histogram
@@ -228,7 +228,7 @@ async function createBarChart() {
         plot_bgcolor: 'white'
     };
 
-    Plotly.newPlot('barchart', traces, layout);
+    Plotly.newPlot('barcharttn', traces, layout);
 }
 
 // Call the createBarChart function to render the bar chart
@@ -294,3 +294,253 @@ window.onload = function() {
         });
     });
 };
+
+//Second section 
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Fetch the CSV file
+        const response = await fetch('static/2021_2022data.csv');
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        // Read the response text
+        const dataText = await response.text();
+        
+        // Parse the CSV data
+        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
+        const data = results.data;
+
+        // Extract columns from data
+        const types = data.map(row => row['Type']);
+        const semee = data.map(row => row['Superficie semée (ha)']);
+        const acceptee = data.map(row => row['Superficie acceptée (ha)']);
+        const refusee = data.map(row => row['Superficie refusée (ha)']);
+
+        // Prepare Plotly data
+        const plotData = [
+            {
+                x: types,
+                y: semee,
+                name: 'Superficie semée (ha)',
+                type: 'bar',
+                marker: { color: '#d8b365' }
+            },
+            {
+                x: types,
+                y: acceptee,
+                name: 'Superficie acceptée (ha)',
+                type: 'bar',
+                marker: { color: '#f4a582' }
+            },
+            {
+                x: types,
+                y: refusee,
+                name: 'Superficie refusée (ha)',
+                type: 'bar',
+                marker: { color: '#a6611a' }
+            }
+        ];
+
+        // Plotly layout
+        const layout = {
+            title: 'Superficies Semées, Acceptées et Refusées par Type de Céréale',
+            xaxis: { title: 'Type de Céréale' },
+            yaxis: { title: 'Superficie (ha)' },
+            barmode: 'group'
+        };
+
+        // Render Plotly chart
+        Plotly.newPlot('histogram-2021', plotData, layout);
+    } catch (error) {
+        console.error('Error loading or parsing CSV file:', error);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Fetch the CSV file
+        const response = await fetch('static/2021_2022data.csv');
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        // Read the response text
+        const dataText = await response.text();
+        
+        // Parse the CSV data
+        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
+        const data = results.data;
+
+        // Filter out rows where Type is 'Total'
+        const filteredData = data.filter(row => row['Type'] !== 'Total');
+
+        // Extract relevant columns from filtered data
+        const types = filteredData.map(row => row['Type']);
+        const quantities = filteredData.map(row => row['Quantité de semences pour multiplication (q)']);
+
+        // Define colors for the pie chart
+        const colors = ['#d9f0a3', '#addd8e', '#78c679'];
+
+        // Prepare Plotly data for pie chart
+        const pieData = [
+            {
+                values: quantities,
+                labels: types,
+                type: 'pie',
+                marker: { colors: colors }
+            }
+        ];
+
+        // Plotly layout for pie chart
+        const pieLayout = {
+            title: 'Quantité de Semences pour Multiplication par Type de Céréale (q)'
+        };
+
+        // Render Plotly pie chart
+        Plotly.newPlot('pie-2021-mul', pieData, pieLayout);
+    } catch (error) {
+        console.error('Error loading or parsing CSV file:', error);
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Fetch the CSV file
+        const response = await fetch('static/2021_2022data.csv');
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        // Read the response text
+        const dataText = await response.text();
+        
+        // Parse the CSV data
+        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
+        const data = results.data;
+
+        // Extract relevant columns from data
+        const types = data.map(row => row['Type']);
+        const quantities = data.map(row => row['Quantité de semences pour multiplication (q)']);
+
+        // Prepare Plotly data for bar chart
+        const barData = [
+            {
+                x: types,
+                y: quantities,
+                type: 'bar',
+                marker: {
+                    color: quantities,
+                    colorscale: 'YlOrBr'
+                }
+            }
+        ];
+
+        // Plotly layout for bar chart
+        const barLayout = {
+            title: 'Quantité de Semences pour Multiplication par Type de Céréale(q)',
+            xaxis: { title: 'Type de Céréale' },
+            yaxis: { title: 'Quantité (q)' }
+        };
+
+        // Render Plotly bar chart
+        Plotly.newPlot('bar-2021-mul', barData, barLayout);
+    } catch (error) {
+        console.error('Error loading or parsing CSV file:', error);
+    }
+});
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Fetch the CSV file
+        const response = await fetch('static/2021_2022data.csv');
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        // Read the response text
+        const dataText = await response.text();
+        
+        // Parse the CSV data
+        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
+        const data = results.data;
+
+        // Extract relevant columns from data
+        const types = data.map(row => row['Type']);
+        const quantities = data.map(row => row['Quantités collectées (q)']);
+
+        // Prepare Plotly data for bar chart
+        const barData = [
+            {
+                x: types,
+                y: quantities,
+                type: 'bar',
+                marker: {
+                    color: quantities,
+                    colorscale: 'YlOrBr'
+                }
+            }
+        ];
+
+        // Plotly layout for bar chart
+        const barLayout = {
+            title: 'Quantités Collectées par Type de Céréale',
+            xaxis: { title: 'Type de Céréale' },
+            yaxis: { title: 'Quantités Collectées (q)' }
+        };
+
+        // Render Plotly bar chart
+        Plotly.newPlot('bar-2021', barData, barLayout);
+    } catch (error) {
+        console.error('Error loading or parsing CSV file:', error);
+    }
+});
+
+document.addEventListener('DOMContentLoaded', async function() {
+    try {
+        // Fetch the CSV file
+        const response = await fetch('static/2021_2022data.csv');
+        if (!response.ok) {
+            throw new Error('Network response was not ok ' + response.statusText);
+        }
+
+        // Read the response text
+        const dataText = await response.text();
+        
+        // Parse the CSV data
+        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
+        const data = results.data;
+
+        // Filter out rows where 'Type' is 'Total'
+        const filteredData = data.filter(row => row['Type'] !== 'Total');
+
+        // Extract relevant columns from data
+        const types = filteredData.map(row => row['Type']);
+        const quantities = filteredData.map(row => row['Quantités collectées (q)']);
+
+        // Prepare colors for the pie chart
+        const colors = ['#d9f0a3', '#addd8e', '#78c679'];
+
+        // Prepare Plotly data for pie chart
+        const pieData = [
+            {
+                values: quantities,
+                labels: types,
+                type: 'pie',
+                marker: {
+                    colors: colors
+                }
+            }
+        ];
+
+        // Plotly layout for pie chart
+        const pieLayout = {
+            title: 'Quantités Collectées par Type de Céréale'
+        };
+
+        // Render Plotly pie chart
+        Plotly.newPlot('pie-2021', pieData, pieLayout);
+    } catch (error) {
+        console.error('Error loading or parsing CSV file:', error);
+    }
+});
