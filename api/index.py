@@ -181,6 +181,9 @@ create_polygon_table()
 def home():
     return render_template('home.html')
 
+def ble():
+    return render_template('ble.html')
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
