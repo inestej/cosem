@@ -60,9 +60,12 @@ function mapCodeToText(code) {
 }
 
 async function createChoropleth() {
-    const url = 'https://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson';
-    const data = await fetchData(url);
-
+    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+    const targetUrl = 'http://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson';
+    const secureUrl = proxyUrl + targetUrl;
+    
+    const data = await fetchData(secureUrl);
+    
     const governorates = ['Manubah', 'Bizerte', 'Zaghouan', 'Siliana', 'Ben Arous', 'Béja', 'Jendouba', 'Le Kef', 'Ariana'];
 
     const features = data.features.filter(feature => governorates.includes(feature.properties.gov_name_f));
