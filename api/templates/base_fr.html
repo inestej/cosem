@@ -29,10 +29,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('home_fr') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#section1">À propos</a>
+                        <a class="nav-link active" href="#section1">À propos</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle no-arrow" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,12 +56,18 @@
                             <a class="nav-link" href="{{ url_for('login_fr') }}"><strong>Se connecter</strong></a>
                         </li>
                     </ul>
-                    <div class="dropdown ms-auto">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">Langue</a>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item" href="{{ url_for('home') }}">Anglais</a></li>
-                            <li><a class="dropdown-item" href="#">Français</a></li>
-                        </ul>
+                    <div class="nav-wrapper">
+                        <div class="sl-nav">
+                            <ul>
+                            <li><b>Français</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                <div class="triangle"></div>
+                                <ul>
+                                <li><a href="#"><i class="sl-flag flag-de" ></i> <span class="active">Français</span></a></li>
+                                <li><a href="{{ url_for('home') }}"><i class="sl-flag flag-usa" href="#"></i> <span>Anglais</span></a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
         </div>
@@ -102,29 +105,16 @@
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h5>Suivez-nous</h5>
+                    <h5>
+                    Suivez-nous :
                     <ul class="list-inline footer-links">
                         <li class="list-inline-item">
                             <a href="https://www.facebook.com/semencescosemtunisie">
                                 <i class="fab fa-facebook"></i>
                             </a>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </li>
                     </ul>
+                    </h5>
                 </div>
             </div>
             <hr>
@@ -132,30 +122,11 @@
                 <div class="col-md-6">
                     <p>© 2024 COSEM .Tous droits réservés.</p>
                 </div>
-                <div class="col-md-6 text-end">
-                    <ul class="list-inline footer-links">
-                        <li class="list-inline-item">
-                            <a href="#" class="text-white">
-                                Politique de confidentialité
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-white">
-                                onditions d'utilisation
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-white">
-                                Plan du site
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-12 ">
-                    <p>Ce site web a été développé par Slim et Nada, avec la supervision de l'encadrante Ines Abdeljaoued Tej .</p>
+                <div class="col-12 text-end">
+                    <p style="color: #303030 !important;">Ce site web a été développé par Slim Dridi et Nada Neffeti, avec la supervision de l'encadrante Ines Abdeljaoued Tej .</p>
                 </div>
             </div>
         </div>

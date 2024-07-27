@@ -21,7 +21,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
 
-@login_manager.user_loader
+@login_manager.user_loader  
 def load_user(user_id):
     return User.query.get(int(user_id))
 
@@ -177,7 +177,7 @@ def create_polygon_table():
 create_polygon_table()
     
 
-@app.route('/')
+@app.route('/en')
 def home():
     return render_template('home.html')
 
@@ -259,7 +259,7 @@ def save_polygon():
         return jsonify({'status': 'error', 'message': 'No coordinates provided'})
 
 
-@app.route('/fr')
+@app.route('/')
 def home_fr():
     return render_template('home_fr.html')
 

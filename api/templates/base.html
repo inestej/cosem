@@ -13,6 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/carousel.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/container.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/section.css') }}">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 </head>
 <body>
 <!-- Navbar -->
@@ -29,10 +31,7 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
                 <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ url_for('home') }}">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#section1">About</a>
+                        <a class="nav-link active" href="#section1">About</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle no-arrow" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
@@ -59,12 +58,18 @@
                             <a class="nav-link" href="{{ url_for('login') }}"><strong>Login</strong></a>
                         </li>
                     </ul>
-                    <div class="dropdown ms-auto">
-                        <a class="nav-link dropdown-toggle" href="#" id="languageDropdown" data-bs-toggle="dropdown" aria-expanded="false">Language</a>
-                        <ul class="dropdown-menu" aria-labelledby="languageDropdown">
-                            <li><a class="dropdown-item" href="#">English</a></li>
-                            <li><a class="dropdown-item" href="{{ url_for('home_fr') }}">French</a></li>
-                        </ul>
+                    <div class="nav-wrapper">
+                        <div class="sl-nav">
+                            <ul>
+                            <li><b>English</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                <div class="triangle"></div>
+                                <ul>
+                                <li><a href="{{ url_for('home_fr') }}"><i class="sl-flag flag-de"></i> <span class="active">French</span></a></li>
+                                <li><a href="#"><i class="sl-flag flag-usa" href="#"></i> <span>English</span></a></li>
+                                </ul>
+                            </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
         </div>
@@ -102,29 +107,16 @@
                     </ul>
                 </div>
                 <div class="col-md-3">
-                    <h5>Follow Us</h5>
+                    <h5>
+                    Follow Us :
                     <ul class="list-inline footer-links">
                         <li class="list-inline-item">
                             <a href="https://www.facebook.com/semencescosemtunisie">
                                 <i class="fab fa-facebook"></i>
                             </a>
                         </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                        </li>
                     </ul>
+                    </h5>
                 </div>
             </div>
             <hr>
@@ -132,30 +124,11 @@
                 <div class="col-md-6">
                     <p>© 2024 COSEM . All rights reserved.</p>
                 </div>
-                <div class="col-md-6 text-end">
-                    <ul class="list-inline footer-links">
-                        <li class="list-inline-item">
-                            <a href="#" class="text-white">
-                                Privacy Policy
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-white">
-                                Terms of Service
-                            </a>
-                        </li>
-                        <li class="list-inline-item">
-                            <a href="#" class="text-white">
-                                Sitemap
-                            </a>
-                        </li>
-                    </ul>
-                </div>
             </div>
             <hr>
             <div class="row">
-                <div class="col-12 ">
-                    <p>This website is developed by Slim & Nada under The ESSAI</p>
+                <div class="col-12 text-end">
+                    <p style="color: #303030 !important;">This website was developed by Slim Dridi and Nada Neffeti, with the supervision of the supervisor Ines Abdeljaoued Tej.</p>
                 </div>
             </div>
         </div>
