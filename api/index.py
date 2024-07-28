@@ -257,6 +257,10 @@ def save_polygon():
         return jsonify({'status': 'success', 'coordinates': coordinates})
     else:
         return jsonify({'status': 'error', 'message': 'No coordinates provided'})
+    
+@app.route('/gallery')
+def gallery():
+    return render_template('gallery.html')
 
 
 @app.route('/')

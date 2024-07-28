@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Gallery</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">COSEM</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="jumbotron jumbotron-fluid text-center">
+        <div class="container">
+            <h1 class="display-4">Gallery</h1>
+            <p class="lead">Explore the beauty of agriculture through our curated gallery.</p>
+        </div>
+    </header>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image1.jpg" class="card-img-top" alt="Agriculture Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Farm Land</h5>
+                        <p class="card-text">Beautiful farm land during sunset.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image2.jpg" class="card-img-top" alt="Agriculture Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Green Field</h5>
+                        <p class="card-text">Lush green field in the morning light.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image3.jpg" class="card-img-top" alt="Agriculture Image 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Harvest Time</h5>
+                        <p class="card-text">Crops ready for harvest.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more image cards as needed -->
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image1.jpg" class="card-img-top" alt="Agriculture Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Farm Land</h5>
+                        <p class="card-text">Beautiful farm land during sunset.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image2.jpg" class="card-img-top" alt="Agriculture Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Green Field</h5>
+                        <p class="card-text">Lush green field in the morning light.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image3.jpg" class="card-img-top" alt="Agriculture Image 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Harvest Time</h5>
+                        <p class="card-text">Crops ready for harvest.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more image cards as needed -->
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image1.jpg" class="card-img-top" alt="Agriculture Image 1">
+                    <div class="card-body">
+                        <h5 class="card-title">Farm Land</h5>
+                        <p class="card-text">Beautiful farm land during sunset.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image2.jpg" class="card-img-top" alt="Agriculture Image 2">
+                    <div class="card-body">
+                        <h5 class="card-title">Green Field</h5>
+                        <p class="card-text">Lush green field in the morning light.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="card">
+                    <img src="image3.jpg" class="card-img-top" alt="Agriculture Image 3">
+                    <div class="card-body">
+                        <h5 class="card-title">Harvest Time</h5>
+                        <p class="card-text">Crops ready for harvest.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Add more image cards as needed -->
+        </div>
+    </div>
+
+    <footer class="bg-light text-center py-4">
+        <div class="container">
+            <p>&copy; 2024 COSEM. All Rights Reserved.</p>
+            <ul class="list-unstyled list-inline">
+                <li class="list-inline-item">
+                    <a href="#" class="text-muted"><i class="fab fa-facebook-f"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="text-muted"><i class="fab fa-twitter"></i></a>
+                </li>
+                <li class="list-inline-item">
+                    <a href="#" class="text-muted"><i class="fab fa-instagram"></i></a>
+                </li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
