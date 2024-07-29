@@ -11,9 +11,18 @@
 .footer h2, .footer h5 {
     color: #fff;
 }
-
+.footer h5 {
+    display: flex;
+    align-items: center;
+    justify-items: center;
+    flex-direction: row;
+}
+.footer i {
+    margin-top: 18px;
+    margin-left: 15px;
+}
 .footer p, .footer ul, .footer li {
-    color: #ccc;
+    color: #cccccc;
 }
 
 .footer .footer-links a {

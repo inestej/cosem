@@ -1,0 +1,68 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    color: #343a40;
+}
+
+.navbar-brand {
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    color: #6c757d !important;
+}
+
+.nav-link {
+    font-weight: bold;
+    color: #6c757d !important;
+}
+
+.nav-link:hover {
+    color: #343a40 !important;
+}
+
+.jumbotron {
+    background-image: url('header-image.jpg'); /* Replace with an actual image URL */
+    background-size: cover;
+    background-position: center;
+    background: linear-gradient(135deg, #149e2b 0%, #80ff80 100%) !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 20px; /* Add rounded edges */
+    padding: 2rem 1rem; /* Adjust padding if needed */
+    margin: 2rem 0; /* Add margin to separate from other content */
+}
+
+.card {
+    border: none;
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-top-left-radius: 0.75rem;
+    border-top-right-radius: 0.75rem;
+    height: 200px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-family: 'Georgia', serif;
+    color: #6c757d;
+}
+
+footer {
+    background-color: #f8f9fa;
+    border-top: 1px solid #e7e7e7;
+}
+
+footer .list-inline-item a {
+    color: #6c757d !important;
+    transition: color 0.2s;
+}
+
+footer .list-inline-item a:hover {
+    color: #343a40 !important;
+}
