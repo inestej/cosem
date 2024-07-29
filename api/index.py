@@ -263,6 +263,11 @@ def gallery():
     return render_template('gallery.html')
 
 
+@app.route('/Galerie')
+def gallery_fr():
+    return render_template('gallery_fr.html')
+
+
 @app.route('/')
 def home_fr():
     return render_template('home_fr.html')
