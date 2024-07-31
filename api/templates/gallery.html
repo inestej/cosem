@@ -7,31 +7,84 @@
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/gallery.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">COSEM</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('home') }}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-
-    <header class="jumbotron jumbotron-fluid text-center">
-        <div class="container">
-            <h1 class="display-4">Gallery</h1>
-            <p class="lead">Discover our advancement.</p>
-        </div>
-    </header>
+    <!-- Navbar -->
+    <div class="base_nav">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('home') }}">
+                    <img src="https://i.postimg.cc/1zZg1sp0/cosem-logo-removebg-preview.png" alt="" width="90" height="75" class="d-inline-block align-text-top logo">
+                    COSEM
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
+                    <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#section1">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle no-arrow" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="services-button">
+                                    Services
+                                </button>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="{{ url_for('public_dashboard') }}">Public Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('login') }}">Private Dashboard</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url_for('gallery') }}">Gallery</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('register') }}"><strong>Sign Up</strong></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ url_for('login') }}"><strong>Login</strong></a>
+                            </li>
+                        </ul>
+                        <div class="nav-wrapper">
+                            <div class="sl-nav">
+                                <ul>
+                                <li><b>English</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    <div class="triangle"></div>
+                                    <ul>
+                                    <li><a href="{{ url_for('gallery_fr') }}"><i class="sl-flag flag-de"></i> <span class="active">French</span></a></li>
+                                    <li><a href="#"><i class="sl-flag flag-usa" href="#"></i> <span>English</span></a></li>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </nav>
+    </div>
+    <div class="hder">
+        <header class="gallery-header">
+            <div data-aos="zoom-in">
+                <div class="title">
+                    <h1><span class="main-title">WELCOME</span><br><span class="sub-title">to</span><br><span class="main-title">COSEM GALLERY</span></h1>
+                </div>
+            </div>
+            
+        </header>
+    </div>
     <div class="two">
         <h1>Tebourba
             <span>30 MAI 2017</span>
@@ -131,9 +184,60 @@
         <a class="next" onclick="changeSlide(1)">&#10095;</a> <!-- Highlighted -->
     </div>
 
-    <footer class="bg-light text-center py-4">
+    <!-- Footer -->
+
+    <footer class="footer p-5">
         <div class="container">
-            <p>&copy; 2024 COSEM. All Rights Reserved.</p>
+            <div class="row">
+                <div class="col-md-3">
+                    <h2>COSEM</h2>
+                </div>
+                <div class="col-md-3">
+                    <h5>About Us</h5>
+                    <p>
+                        The COSEM is dedicated to supporting farmers with 
+                        the latest information, tools, and resources.
+                         Our mission is to empower farmers to achieve greater productivity 
+                         and sustainability.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li>E-mail: cosem@planet.tn</li>
+                        <li>Phone: 71 607 117</li>
+                        <li>Fax: 71 606 917</li>
+                        <a href="https://maps.app.goo.gl/PQt2s4M92UAZgvCv9">
+                            <li>Address: Siège Social: 46, Rue des Travailleurs - 2010 Manouba, Tunisie</li>
+                        </a>
+                        <a href="https://cosem.vercel.app"><li>cosem.vercel.app</li></a>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>
+                    Follow Us :
+                    <ul class="list-inline footer-links">
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com/semencescosemtunisie">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    </h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>© 2024 COSEM . All rights reserved.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 text-end">
+                    <p style="color: #303030 !important;">This website is developed by Slim Dridi & Nada Naffeti under The ESSAIs' supervisor Ines Abdeljaoued-Tej.</p>
+                </div>
+            </div>
         </div>
     </footer>
     <script>
@@ -141,15 +245,18 @@
         const images = document.querySelectorAll('.card-img');
         const modal = document.getElementById("myModal");
         const modalImg = document.getElementById("img01");
+        const navbar = document.querySelector('.navbar'); // Declare navbar here
 
         function openModal(index) {
             slideIndex = index;
             showSlide(slideIndex);
             modal.classList.remove('hidden'); // Remove the hidden class to show modal
+            navbar.classList.add('navbar-hidden'); // Hide navbar
         }
 
         function closeModal() {
             modal.classList.add('hidden'); // Add the hidden class to hide modal
+            navbar.classList.remove('navbar-hidden'); // Show navbar
         }
 
         function showSlide(index) {
@@ -169,10 +276,30 @@
         images.forEach((img, index) => {
             img.onclick = () => openModal(index);
         });
+            //navbar
+        window.addEventListener('scroll', function() {
+            var navbar = document.querySelector('.navbar');
+            console.log('Scroll event triggered. Current scroll position: ', window.scrollY);
+            if (window.scrollY > 50) {
+                navbar.classList.add('navbar-scroll');
+            } else {
+                navbar.classList.remove('navbar-scroll');
+            }
+        });
+                // Initialize AOS
+        document.addEventListener('DOMContentLoaded', function() {
+            AOS.init();
+        });
 
     </script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
 </body>
 </html>
