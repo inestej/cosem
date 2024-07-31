@@ -39,6 +39,52 @@ document.addEventListener("DOMContentLoaded", function(event) {
     });
 
 
+// first block
+// Function to fetch and parse the CSV file
+function fetchAndDisplayCSV(url, tableId, theadId, tbodyId) {
+    fetch(url)
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.trim().split("\n");
+            const headers = rows[0].split(",");
+            const tbody = document.getElementById(tbodyId);
+            const thead = document.getElementById(theadId);
+
+            // Clear existing headers and rows
+            thead.innerHTML = '';
+            tbody.innerHTML = '';
+
+            // Add headers to the table
+            const headerRow = document.createElement('tr');
+            headers.forEach(header => {
+                const th = document.createElement('th');
+                th.innerText = header;
+                headerRow.appendChild(th);
+            });
+            thead.appendChild(headerRow);
+
+            // Add data rows to the table
+            rows.slice(1).forEach(row => {
+                const tr = document.createElement('tr');
+                const columns = row.split(",");
+                columns.forEach(column => {
+                    const td = document.createElement('td');
+                    td.innerText = column;
+                    tr.appendChild(td);
+                });
+                tbody.appendChild(tr);
+            });
+
+            // Initialize DataTable
+            $(`#${tableId}`).DataTable();
+        })
+        .catch(error => console.error('Error fetching the CSV file:', error));
+}
+
+// Call the function with the paths to your CSV files
+fetchAndDisplayCSV('static/2022_2023data.csv', 'myTable1', 'tableHeader1', 'tableBody1');
+fetchAndDisplayCSV('static/qualite_semence.csv', 'myTable2', 'tableHeader2', 'tableBody2');
+
 
 
 async function fetchData(url) {
@@ -60,11 +106,10 @@ function mapCodeToText(code) {
 }
 
 async function createChoropleth() {
-    const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-    const targetUrl = 'http://catalog.industrie.gov.tn/dataset/9910662a-4594-453f-a710-b2f339e0d637/resource/1b7e3eba-b178-4902-83db-ef46f26e98a0/download/delegations.geojson';
-    const secureUrl = proxyUrl + targetUrl;
-    
-    const data = await fetchData(secureUrl);
+    const localPath = 'static/delegations.geojson';
+
+    const response = await fetch(localPath);
+    const data = await response.json();
     
     const governorates = ['Manubah', 'Bizerte', 'Zaghouan', 'Siliana', 'Ben Arous', 'Béja', 'Jendouba', 'Le Kef', 'Ariana'];
 
@@ -111,7 +156,8 @@ async function createChoropleth() {
     Plotly.newPlot('maptn', mapData, layout);
 }
 
-createChoropleth()
+createChoropleth();
+
 
 async function createHistogram() {
     // Load the CSV file
@@ -175,7 +221,7 @@ async function createHistogram() {
         plot_bgcolor: 'white'
     };
 
-    Plotly.newPlot('histogramtn', data, layout);
+    Plotly.newPlot('histogramtn', data, layout,{ responsive: true });
 }
 
 // Invoke the async function to create the histogram
@@ -230,78 +276,19 @@ async function createBarChart() {
         plot_bgcolor: 'white'
     };
 
-    Plotly.newPlot('barcharttn', traces, layout);
+    Plotly.newPlot('barcharttn', traces, layout,{ responsive: true });
 }
 
 // Call the createBarChart function to render the bar chart
 createBarChart();
 
 
-window.onload = function() {
-    // Initialize the map centered on Tunisia
-    const map = L.map('map').setView([33.8869, 9.5375], 6);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    // Leaflet Draw Control
-    const drawnItems = new L.FeatureGroup();
-    map.addLayer(drawnItems);
-
-    const drawControl = new L.Control.Draw({
-        edit: {
-            featureGroup: drawnItems
-        },
-        draw: {
-            polygon: true,
-            polyline: false,
-            rectangle: false,
-            circle: false,
-            marker: false,
-            circlemarker: false
-        }
-    });
-    map.addControl(drawControl);
-
-    // Handle the creation of drawn polygons
-    map.on(L.Draw.Event.CREATED, function (event) {
-        const layer = event.layer;
-        drawnItems.addLayer(layer);
-
-        // Store the coordinates of the polygon
-        const polygonCoordinates = layer.getLatLngs()[0].map(coord => [coord.lat, coord.lng]);
-        console.log('Polygon coordinates:', polygonCoordinates);
-
-        // Send the coordinates to the server (Flask backend)
-        fetch('/save_polygon', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ coordinates: polygonCoordinates })
-        })
-        .then(response => response.json())
-        .then(data => {
-            console.log('Polygon saved:', data);
-            if (data.status === 'success') {
-                alert('Polygon has been successfully registered!');
-            } else {
-                alert('Failed to register the polygon. Please try again.');
-            }
-        })
-        .catch(error => {
-            console.error('Error saving polygon:', error);
-            alert('An error occurred while saving the polygon. Please try again.');
-        });
-    });
-};
-
-//Second section 
+//Second block 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetch the CSV file
-        const response = await fetch('static/2021_2022data.csv');
+        const response = await fetch('static/2022_2023data.csv');
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
@@ -315,7 +302,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Extract columns from data
         const types = data.map(row => row['Type']);
-        const semee = data.map(row => row['Superficie semée (ha)']);
+        const controle = data.map(row => row['Superficie contrôlée (ha)']);
         const acceptee = data.map(row => row['Superficie acceptée (ha)']);
         const refusee = data.map(row => row['Superficie refusée (ha)']);
 
@@ -323,8 +310,8 @@ document.addEventListener('DOMContentLoaded', async function() {
         const plotData = [
             {
                 x: types,
-                y: semee,
-                name: 'Superficie semée (ha)',
+                y: controle,
+                name: 'Superficie contrôlée (ha)',
                 type: 'bar',
                 marker: { color: '#d8b365' }
             },
@@ -346,14 +333,14 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Plotly layout
         const layout = {
-            title: 'Superficies Semées, Acceptées et Refusées par Type de Céréale',
+            title: 'COSEM 2023 : Superficies Contrôlées, Acceptées et Refusées par Type de Céréale ',
             xaxis: { title: 'Type de Céréale' },
             yaxis: { title: 'Superficie (ha)' },
             barmode: 'group'
         };
 
         // Render Plotly chart
-        Plotly.newPlot('histogram-2021', plotData, layout);
+        Plotly.newPlot('histogram-2023', plotData, layout,{ responsive: true });
     } catch (error) {
         console.error('Error loading or parsing CSV file:', error);
     }
@@ -362,7 +349,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         // Fetch the CSV file
-        const response = await fetch('static/2021_2022data.csv');
+        const response = await fetch('static/2022_2023data.csv');
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
         }
@@ -379,7 +366,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Extract relevant columns from filtered data
         const types = filteredData.map(row => row['Type']);
-        const quantities = filteredData.map(row => row['Quantité de semences pour multiplication (q)']);
+        const quantities = filteredData.map(row => row['Quantités collectées (q)']);
 
         // Define colors for the pie chart
         const colors = ['#d9f0a3', '#addd8e', '#78c679'];
@@ -396,153 +383,76 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         // Plotly layout for pie chart
         const pieLayout = {
-            title: 'Quantité de Semences pour Multiplication par Type de Céréale (q)'
+            title: 'COSEM 2023 : Quantités Collectées par Type de Céréale (QX)'
         };
 
         // Render Plotly pie chart
-        Plotly.newPlot('pie-2021-mul', pieData, pieLayout);
+        Plotly.newPlot('pie-2023', pieData, pieLayout,{ responsive: true });
     } catch (error) {
         console.error('Error loading or parsing CSV file:', error);
     }
 });
 
+// third block
+const colors = {
+    'Quantités nettes calibrées': '#e5f5e0',
+    'Quantités certifiées semences de base': '#a1d99b',
+    'Quantités certifiées semences R1': '#31a354',
+    'Quantités certifiées semences R2': '#006d2c',
+    'Quantités déclassées en semences ordinaires': '#00441b',
+    'Quantités refusées pour faible capacité germinative': '#005a32'
+};
 
-document.addEventListener('DOMContentLoaded', async function() {
-    try {
-        // Fetch the CSV file
-        const response = await fetch('static/2021_2022data.csv');
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
+// Data for each type of culture
+const data = {
+    'Blé dur': {
+        'Quantités nettes calibrées': 66780,
+        'Quantités certifiées semences de base': 4100.0,
+        'Quantités certifiées semences R1': 26700.0,
+        'Quantités certifiées semences R2': 1000.0,
+        'Quantités déclassées en semences ordinaires': 25100.0,
+        'Quantités refusées pour faible capacité germinative': 9880.0
+    },
+    'Blé tendre': {
+        'Quantités nettes calibrées': 1350,
+        'Quantités certifiées semences de base': 0.0,
+        'Quantités certifiées semences R1': 0.0,
+        'Quantités certifiées semences R2': 0.0,
+        'Quantités déclassées en semences ordinaires': 200.0,
+        'Quantités refusées pour faible capacité germinative': 1150.0
+    },
+    'Orge et triticale': {
+        'Quantités nettes calibrées': 692,
+        'Quantités certifiées semences de base': 0.0,
+        'Quantités certifiées semences R1': 212.0,
+        'Quantités certifiées semences R2': 0.0,
+        'Quantités déclassées en semences ordinaires': 480.0,
+        'Quantités refusées pour faible capacité germinative': 0.0
+    }
+};
+
+// Function to create a pie chart for a specific type of culture
+function createPieChart(typeCulture, elementId) {
+    const categories = Object.keys(data[typeCulture]);
+    const quantities = Object.values(data[typeCulture]);
+
+    const trace = {
+        labels: categories,
+        values: quantities,
+        type: 'pie',
+        marker: {
+            colors: categories.map(category => colors[category])
         }
+    };
 
-        // Read the response text
-        const dataText = await response.text();
-        
-        // Parse the CSV data
-        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
-        const data = results.data;
+    const layout = {
+        title: `COSEM 2023 : Quantités par Catégorie pour ${typeCulture}`
+    };
 
-        // Extract relevant columns from data
-        const types = data.map(row => row['Type']);
-        const quantities = data.map(row => row['Quantité de semences pour multiplication (q)']);
+    Plotly.newPlot(elementId, [trace], layout, {responsive: true});
+}
 
-        // Prepare Plotly data for bar chart
-        const barData = [
-            {
-                x: types,
-                y: quantities,
-                type: 'bar',
-                marker: {
-                    color: quantities,
-                    colorscale: 'YlOrBr'
-                }
-            }
-        ];
-
-        // Plotly layout for bar chart
-        const barLayout = {
-            title: 'Quantité de Semences pour Multiplication par Type de Céréale(q)',
-            xaxis: { title: 'Type de Céréale' },
-            yaxis: { title: 'Quantité (q)' }
-        };
-
-        // Render Plotly bar chart
-        Plotly.newPlot('bar-2021-mul', barData, barLayout);
-    } catch (error) {
-        console.error('Error loading or parsing CSV file:', error);
-    }
-});
-document.addEventListener('DOMContentLoaded', async function() {
-    try {
-        // Fetch the CSV file
-        const response = await fetch('static/2021_2022data.csv');
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-
-        // Read the response text
-        const dataText = await response.text();
-        
-        // Parse the CSV data
-        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
-        const data = results.data;
-
-        // Extract relevant columns from data
-        const types = data.map(row => row['Type']);
-        const quantities = data.map(row => row['Quantités collectées (q)']);
-
-        // Prepare Plotly data for bar chart
-        const barData = [
-            {
-                x: types,
-                y: quantities,
-                type: 'bar',
-                marker: {
-                    color: quantities,
-                    colorscale: 'YlOrBr'
-                }
-            }
-        ];
-
-        // Plotly layout for bar chart
-        const barLayout = {
-            title: 'Quantités Collectées par Type de Céréale',
-            xaxis: { title: 'Type de Céréale' },
-            yaxis: { title: 'Quantités Collectées (q)' }
-        };
-
-        // Render Plotly bar chart
-        Plotly.newPlot('bar-2021', barData, barLayout);
-    } catch (error) {
-        console.error('Error loading or parsing CSV file:', error);
-    }
-});
-
-document.addEventListener('DOMContentLoaded', async function() {
-    try {
-        // Fetch the CSV file
-        const response = await fetch('static/2021_2022data.csv');
-        if (!response.ok) {
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-
-        // Read the response text
-        const dataText = await response.text();
-        
-        // Parse the CSV data
-        const results = Papa.parse(dataText, { header: true, dynamicTyping: true });
-        const data = results.data;
-
-        // Filter out rows where 'Type' is 'Total'
-        const filteredData = data.filter(row => row['Type'] !== 'Total');
-
-        // Extract relevant columns from data
-        const types = filteredData.map(row => row['Type']);
-        const quantities = filteredData.map(row => row['Quantités collectées (q)']);
-
-        // Prepare colors for the pie chart
-        const colors = ['#d9f0a3', '#addd8e', '#78c679'];
-
-        // Prepare Plotly data for pie chart
-        const pieData = [
-            {
-                values: quantities,
-                labels: types,
-                type: 'pie',
-                marker: {
-                    colors: colors
-                }
-            }
-        ];
-
-        // Plotly layout for pie chart
-        const pieLayout = {
-            title: 'Quantités Collectées par Type de Céréale'
-        };
-
-        // Render Plotly pie chart
-        Plotly.newPlot('pie-2021', pieData, pieLayout);
-    } catch (error) {
-        console.error('Error loading or parsing CSV file:', error);
-    }
-});
+// Create pie charts for each type of culture
+createPieChart('Blé dur', 'ble-dur-chart');
+createPieChart('Blé tendre', 'ble-tendre-chart');
+createPieChart('Orge et triticale', 'orge-triticale-chart');
