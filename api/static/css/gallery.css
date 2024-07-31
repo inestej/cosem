@@ -1,29 +1,47 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f8f9fa;
+    background-color: #faf5e8;
     color: #343a40;
 }
 
-.navbar-brand {
-    font-family: 'Georgia', serif;
-    font-weight: bold;
-    color: #6c757d !important;
+.hder {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.nav-link {
-    font-weight: bold;
-    color: #6c757d !important;
+.gallery-header {
+    text-align: center;
 }
 
-.nav-link:hover {
-    color: #343a40 !important;
+.title h1 {
+    margin: 0;
+    line-height: 1.2;
+    color: #333;
 }
 
+.main-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 4em;
+    display: inline-block;
+}
 
+.sub-title {
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    color: #8bc34a;
+    position: relative;
+    top: -10px;
+}
 
   .two h1 {
     text-transform: capitalize;
     padding-left: 10%;
+    padding-top: 15px;
   }
   
   .two h1 span {
@@ -37,16 +55,6 @@ body {
     padding-bottom: 10px;
   }
 
-.jumbotron {
-    background-image: url('header-image.jpg'); /* Replace with an actual image URL */
-    background-size: 400% 400%;
-    background-position: center;
-    background: linear-gradient(135deg, #149e2b 0%, #80ff80 100%) !important;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    border-radius: 20px; /* Add rounded edges */
-    padding: 2rem 1rem; /* Adjust padding if needed */
-    margin: 2rem 0; /* Add margin to separate from other content */
-}
 
 .card {
     border: none;

@@ -1,5 +1,10 @@
+.container-fluid{
+    opacity: 1;
+}
 .nav-link {
     opacity: 2;
+    font-weight: bold;
+    color: #6c757d !important;
 }
 .navbar-nav {
     flex-direction: row;
@@ -8,7 +13,12 @@
     margin-left: 20px;
     display: flex;
 }
-
+.nav-link:hover {
+    color: #343a40 !important;
+}
+.navbar-hidden {
+    display: none;
+}
 .nav-item {
     padding: 0 20px; /* Adjust the padding as needed */
 }
@@ -21,6 +31,9 @@
     display: flex;
     align-items: center;
     margin-left: 9%;
+    font-family: 'Georgia', serif;
+    font-weight: bold;
+    color: #6c757d !important;
 }
 
 .navbar-brand img {
@@ -40,7 +53,7 @@
 
 /* Navbar transition background */
 .navbar-scroll {
-    background: linear-gradient(135deg, #149e2b 0%, #80ff80 100%) !important;
+    background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%) !important;
     transition: background-color 0.5s ease-in-out;
 }
 
