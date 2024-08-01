@@ -312,6 +312,31 @@ window.onload = function() {
             });
         });
     };
+
+    document.getElementById('dataForm').addEventListener('submit', function(event) {
+        event.preventDefault();
     
-
-
+        // Define the types
+        let types = ["Blé dur", "Blé tendre", "Orge", "Triticale", "Autres"];
+        
+        // Capture the form data
+        let superficie = Array.from(document.getElementsByName('superficie[]')).map(input => parseFloat(input.value) || 0);
+        let quantites = Array.from(document.getElementsByName('quantites[]')).map(input => parseFloat(input.value) || 0);
+        let rendement = Array.from(document.getElementsByName('rendement[]')).map(input => parseFloat(input.value) || 0);
+    
+        // Prepare data for URL
+        const data = {
+            types: JSON.stringify(types),
+            superficie: JSON.stringify(superficie),
+            quantites: JSON.stringify(quantites),
+            rendement: JSON.stringify(rendement)
+        };
+        
+        const queryString = new URLSearchParams(data).toString();
+    
+        // Redirect to the results page with data in URL
+        window.location.href = `/yourdash_fr?${queryString}`;
+    });
+    
+    
+    

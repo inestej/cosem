@@ -239,6 +239,20 @@ def register():
 def private_dashboard():
     return render_template('private_dashboard.html')
 
+@app.route('/analyze')
+@login_required 
+def analyze():
+    return render_template('analyze.html')
+
+@app.route('/yourdash')
+@login_required
+def yourdash():
+    types = request.args.getlist('types')
+    superficie = request.args.getlist('superficie')
+    quantites = request.args.getlist('quantites')
+    rendement = request.args.getlist('rendement')
+    return render_template('yourdash.html', types=types, superficie=superficie, quantites=quantites, rendement=rendement)
+
 @app.route('/public_dashboard')
 def public_dashboard():
     return render_template('public_dashboard.html')
@@ -329,6 +343,17 @@ def register_fr():
 @login_required 
 def private_dashboard_fr():
     return render_template('private_dashboard_fr.html')
+
+@app.route('/analyse_fr')
+@login_required 
+def analyse_fr():
+    return render_template('analyse_fr.html')
+
+@app.route('/yourdash_fr')
+@login_required 
+def yourdash_fr():
+    return render_template('yourdash_fr.html')
+
 
 @app.route('/public_dashboard_fr')
 def public_dashboard_fr():

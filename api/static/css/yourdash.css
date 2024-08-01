@@ -11,6 +11,41 @@ header {
     text-align: center;
     padding: 20px 0;
 }
+.nav_logo{
+    text-decoration: none !important;
+}
+.nav_logo_name {
+    text-decoration: none !important;
+}
+.nav_link{
+    text-decoration: none !important;
+} 
+.nav_list {
+    text-decoration: none !important;
+}
+.nav_name{
+    text-decoration: none !important;
+}
+.jumbotron {
+    background: linear-gradient(45deg,#327747, #91eaaf);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+.chart-container {
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 1px solid #ccc; /* Optional styling for better visualization */
+    background-color: white; /* Optional background color */
+    min-height: 300px; /* Minimum height for each container */
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
 .two h1 {
     text-transform: capitalize;
     padding-top: 40px;
@@ -29,67 +64,6 @@ header {
     padding-bottom: 10px;
   }
 
-.block {
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    grid-template-rows: repeat(4, 1fr);
-    gap: 8px;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.container-fluid {
+  .container-fluid {
     margin-left: 200px;
 }
-
-
-
-.jumbotron {
-    background: linear-gradient(45deg,#327747, #91eaaf);
-    background-size: 400% 400%;
-    animation: gradient 15s ease infinite;
-}
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-
-
-
-.chart-container {
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    border: 1px solid #ccc; /* Optional styling for better visualization */
-    background-color: white; /* Optional background color */
-    min-height: 300px; /* Minimum height for each container */
-}
-
-.map-section {
-    margin: 20px 0;
-}
-
-.map-container {
-    height: 600px;
-    width: 100%;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.dataTables_wrapper{
-    margin-top: 20px;
-}
-
-
