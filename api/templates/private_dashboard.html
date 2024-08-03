@@ -34,7 +34,7 @@
         <div class="l-navbar" id="nav-bar">
             <nav class="nav">
                 <div> <a href="{{ url_for('home') }}" class="nav_logo"> <i class='bx bx-layer nav_logo-icon'></i> <span class="nav_logo-name">COSEM</span> </a>
-                    <div class="nav_list"> <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a href="#" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a> <a href="#" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Messages</span> </a> <a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a> <a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">Files</span> </a> <a href="#" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span> </a> </div>
+                    <div class="nav_list"> <a href="#" class="nav_link active"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> <a href="{{ url_for('analyze') }}" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Analyze</span> </a> </div>
                 </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
             </nav>
         </div>
@@ -42,7 +42,7 @@
             <header class="mb-4">
                 <div class="jumbotron text-white bg-gradient-primary p-4 rounded">
                     <div class="container">
-                        <h1 class="display-4">Private Dashboard</h1>
+                        <h1 class="display-4" style="color: white;">Private Dashboard</h1>
                         <p class="lead">Visualize and analyze crop production data effectively</p>
                     </div>
                 </div>
@@ -68,12 +68,6 @@
                 <thead id="tableHeader1"></thead>
                 <tbody id="tableBody1"></tbody>
             </table>
-            <div class="two">
-                <h1>Highlight your own land:</h1>
-            </div> 
-            <section class="map-section mb-4">
-                <div id="map" class="map-container"></div>
-            </section>
         </div>
     </div>
     <script src="{{ url_for('static', filename='js/private_dashboard.js') }}"></script>
