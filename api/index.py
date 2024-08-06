@@ -276,6 +276,10 @@ def save_polygon():
 def gallery():
     return render_template('gallery.html')
 
+@app.route('/Cereals_Catalog')
+def Cereals_Catalog():
+    return render_template('Cereals_Catalog.html')
+
 
 @app.route('/Galerie')
 def gallery_fr():
@@ -358,6 +362,10 @@ def yourdash_fr():
 @app.route('/public_dashboard_fr')
 def public_dashboard_fr():
     return render_template('public_dashboard_fr.html')
+
+@app.route('/Cereals_Catalog_fr')
+def Cereals_Catalog_fr():
+    return render_template('Cereals_Catalog_fr.html')
 
 
 if __name__ == '__main__':

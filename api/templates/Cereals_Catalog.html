@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture Gallery</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/cereals_catalog.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/footer.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/nav.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+</head>
+<body>
+    <div class="base_nav">
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="{{ url_for('home') }}">
+                    <img src="https://i.postimg.cc/1zZg1sp0/cosem-logo-removebg-preview.png" alt="" width="90" height="75" class="d-inline-block align-text-top logo">
+                    COSEM
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-end" id="navbarScroll">
+                    <ul class="navbar-nav my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#section1">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle no-arrow" href="#" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="services-button">
+                                    Services
+                                </button>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <li><a class="dropdown-item" href="{{ url_for('public_dashboard') }}">Public Dashboard</a></li>
+                                <li><a class="dropdown-item" href="{{ url_for('login') }}">Private Dashboard</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('contact') }}">Contact</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="{{ url_for('gallery') }}">Gallery</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#">Cereals Catalog</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="d-flex">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('register') }}"><strong>Sign Up</strong></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ url_for('login') }}"><strong>Login</strong></a>
+                        </li>
+                    </ul>
+                    <div class="nav-wrapper">
+                        <div class="sl-nav">
+                            <ul>
+                            <li><b>English</b> <i class="fa fa-angle-down" aria-hidden="true"></i>
+                                    <div class="triangle"></div>
+                                    <ul>
+                                    <li><a href="{{ url_for('Cereals_Catalog_fr') }}"><i class="sl-flag flag-de" ></i> <span class="active">French</span></a></li>
+                                    <li><a href="#"><i class="sl-flag flag-usa" href="#"></i> <span>English</span></a></li>
+                                    </ul>
+                                </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </nav>
+    </div>
+    </div>
+    <div class="hder">
+        <header class="gallery-header">
+            <div data-aos="zoom-in">
+                <div class="title">
+                    <h1><span class="main-title">BIENVENUE</span><br><span class="sub-title">à la</span><br><span class="main-title">Catalogue Céréales</span></h1>
+                </div>
+            </div>
+            
+        </header>
+    </div>
+
+    <div class="sidebar">
+        <h3>Table of Contents</h3>
+        <a href="#intro">Introduction</a>
+        <a href="#ble-dur">Blé Dur</a>
+        <a href="#ble-tendre">Blé Tendre</a>
+        <a href="#orge">Orge</a>
+        <a href="#triticale">Triticale</a>
+        <a href="#pratiques-culturales">Pratiques Culturales</a>
+        <a href="#defis">Défis</a>
+        <a href="#maladies">Maladies des Céréales</a>
+        <a href="#liens-utiles">Liens utiles</a>
+    </div>
+    <main>
+        <section class="intro-section" id="intro">
+            <p class="intro-paragraph">
+                La culture des céréales en Tunisie est une activité agricole majeure, influencée par le climat méditerranéen du pays, caractérisé par des hivers doux et humides et des étés chauds et secs. Les principales céréales cultivées en Tunisie sont le blé dur, le blé tendre, l’orge et le triticale.
+            </p>
+        </section>
+        <section class="wheat-dur" id="ble-dur">
+            <h2>Blé Dur</h2>
+            <p>Le blé dur est la céréale la plus cultivée en Tunisie, principalement utilisée pour la production de semoule et de pâtes, qui sont des éléments essentiels de l'alimentation tunisienne. La culture du blé dur se fait principalement dans les régions du nord et du centre du pays, où les conditions climatiques et les sols sont les plus favorables.</p>
+            <ul>
+                <li><strong>Karim (2005)</strong>: Variété non hybride d'hiver, développée par l'INRAT, adaptée aux conditions locales.</li>
+                <li><strong>Razzak (2005)</strong>: Variété non hybride d'hiver, connue pour sa résistance aux maladies et sa robustesse.</li>
+                <li><strong>Khiar (2005)</strong>: Variété d'hiver, bien adaptée aux sols méditerranéens, produisant un grain de haute qualité.</li>
+                <li><strong>Oum Rabia (2005)</strong>: Variété non hybride, adaptée pour la culture d'hiver, développée pour résister aux stress climatiques.</li>
+                <li><strong>Inrat 69 (2005)</strong>: Variété historique, souvent choisie pour sa stabilité et son rendement régulier.</li>
+                <li><strong>Chili (2005)</strong>: Variété résistante aux maladies, adaptée aux climats hivernaux.</li>
+                <li><strong>Mahmoudi (2005)</strong>: Connu pour sa robustesse et sa capacité à produire dans des conditions difficiles.</li>
+                <li><strong>Dhahbi (2017)</strong>: Développée par l'INRAT, cette variété de printemps est résistante et productive.</li>
+                <li><strong>INRAT 100 (2016)</strong>: Variété d'hiver de haute performance, développée par l'INRAT.</li>
+                <li><strong>Salim (2009)</strong>: Développée par l'INRAT, cette variété est adaptée aux conditions locales.</li>
+                <li><strong>Maâli (2007)</strong>: Variété hivernale développée par l'INRAT pour des conditions locales.</li>
+                <li><strong>Nasr (2002)</strong>: Variété fixée d'hiver, choisie pour sa robustesse et sa qualité de grain.</li>
+            </ul>
+        </section>
+        <section class="wheat-soft" id="ble-tendre">
+            <h2>Blé Tendre</h2>
+            <p>Le blé tendre est également cultivé, bien que dans une moindre mesure par rapport au blé dur. Il est principalement utilisé pour la production de farine destinée à la panification. Les régions du nord sont les plus propices à la culture du blé tendre en raison de leurs précipitations plus élevées.</p>
+            <ul>
+                <li><strong>Salambo (2005)</strong>: Variété d'hiver non hybride, développée pour une haute résistance aux maladies.</li>
+                <li><strong>Byrsa (2005)</strong>: Connu pour sa robustesse et sa production régulière en conditions hivernales.</li>
+                <li><strong>Ariana 66 (2005)</strong>: Variété non hybride d'hiver avec une bonne qualité de grain.</li>
+                <li><strong>Vagua (2005)</strong>: Adaptée aux hivers rigoureux, offrant une bonne tolérance aux maladies.</li>
+                <li><strong>Florence x Aurore (2005)</strong>: Variété d'hiver développée pour sa qualité de grain et sa résistance.</li>
+                <li><strong>Utique (2005)</strong>: Connu pour sa robustesse en conditions hivernales.</li>
+                <li><strong>Tahent (2009)</strong>: Développée par l'INRAT pour sa robustesse en hiver.</li>
+                <li><strong>Haidra (2002)</strong>: Variété fixée, adaptée pour toutes les saisons.</li>
+                <li><strong>Kods (2020)</strong>: Variété hivernale développée par l'INRAT pour des conditions locales.</li>
+                <li><strong>Jerissa (2022)</strong>: Variété moderne d'hiver, développée pour une haute productivité.</li>
+            </ul>
+        </section>
+        <section class="barley" id="orge">
+            <h2>Orge</h2>
+            <p>L'orge est une culture importante en Tunisie, utilisée à la fois pour l'alimentation humaine et animale. Elle est particulièrement appréciée pour sa résistance à la sécheresse et sa capacité à pousser dans des conditions moins favorables. L'orge est souvent cultivée dans les zones semi-arides du centre et du sud du pays.</p>
+            <ul>
+                <li><strong>Manel (2005)</strong>: Développée par l'INRAT, cette variété est résistante et productive.</li>
+                <li><strong>Rihane (2005)</strong>: Conçu pour les hivers rigoureux, avec une bonne tolérance aux maladies.</li>
+                <li><strong>Imen (2011)</strong>: Développée par l'INRAT, cette variété est adaptée aux conditions locales.</li>
+                <li><strong>Mercur (2023)</strong>: Variété hivernale avec une bonne tolérance aux stress climatiques.</li>
+                <li><strong>Kounouz (2010)</strong>: Adaptée aux conditions hivernales, avec une bonne qualité de grain.</li>
+                <li><strong>Rima (2019)</strong>: Variété fixée d'hiver, développée par l'INRAT.</li>
+            </ul>
+        </section>
+        <section class="triticale" id="triticale">
+            <h2>Triticale</h2>
+            <p>Le triticale, un hybride de blé et de seigle, est cultivé en Tunisie pour sa tolérance aux sols pauvres et aux conditions climatiques difficiles. Il est principalement utilisé comme fourrage pour le bétail, mais aussi pour la production de farine dans certaines régions.</p>
+            <ul>
+                <li><strong>Tritical 18 (2005)</strong>: Variété fixée d'hiver, connue pour sa robustesse.</li>
+                <li><strong>Tritical 13 (2005)</strong>: Connu pour sa stabilité en conditions hivernales.</li>
+                <li><strong>Khir (2013)</strong>: Développée par l'INRAT, cette variété est résistante et productive.</li>
+                <li><strong>Tritical 82 (2005)</strong>: Variété fixée d'hiver, adaptée aux conditions rigoureuses.</li>
+                <li><strong>Tritical 83 (2005)</strong>: Connu pour sa robustesse et sa qualité de grain.</li>
+            </ul>
+        </section>
+        <section class="cultural-practices" id="pratiques-culturales">
+            <h2>Pratiques Culturales</h2>
+            <ul>
+                <li><strong>Saison de Culture</strong>: Les semis se font généralement en automne (octobre-novembre) pour une récolte au printemps (mai-juin).</li>
+                <li><strong>Irrigation</strong>: La majorité des cultures céréalières en Tunisie sont pluviales, mais l'irrigation est pratiquée dans certaines régions pour améliorer les rendements.</li>
+                <li><strong>Rotations Culturales</strong>: La rotation des cultures est couramment pratiquée pour maintenir la fertilité des sols et contrôler les maladies et les mauvaises herbes.</li>
+                <li><strong>Variétés</strong>: L'Institut National de la Recherche Agronomique de Tunisie (INRAT) et d'autres institutions introduisent régulièrement de nouvelles variétés améliorées pour augmenter la productivité et la résistance aux maladies.</li>
+            </ul>
+        </section>
+        <section class="challenges" id="defis">
+            <h2>Défis</h2>
+            <ul>
+                <li><strong>Conditions Climatiques</strong>: La variabilité des précipitations et les périodes de sécheresse sont des défis majeurs pour les agriculteurs.</li>
+                <li><strong>Rendements</strong>: Les rendements des céréales en Tunisie sont souvent inférieurs à ceux des pays plus industrialisés en raison des limitations climatiques et des pratiques agricoles traditionnelles.</li>
+                <li><strong>Modernisation</strong>: L'introduction de nouvelles technologies et de pratiques agricoles modernes est essentielle pour améliorer la productivité et la durabilité de la culture des céréales en Tunisie.</li>
+            </ul>
+        </section>
+        <section class="diseases" id="maladies">
+            <h2>Maladies des Céréales</h2>
+            <h3>Blé Dur et Blé Tendre</h3>
+            <ol>
+                <li><strong>Rouille du Blé</strong>:
+                    <ul>
+                        <li><strong>Rouille jaune (Puccinia striiformis)</strong>: Se manifeste par des stries jaunes sur les feuilles.</li>
+                        <li><strong>Rouille brune (Puccinia recondita)</strong>: Apparaît sous forme de pustules brun foncé sur les feuilles.</li>
+                        <li><strong>Rouille noire (Puccinia graminis)</strong>: Provoque des pustules noires sur les tiges et les feuilles.</li>
+                    </ul>
+                </li>
+                <li><strong>Oïdium (Blumeria graminis)</strong>: Se présente sous forme de poudre blanche sur les feuilles, les tiges et les épis.</li>
+                <li><strong>Septoriose (Septoria tritici)</strong>: Causée par des champignons du genre Septoria, elle se manifeste par des taches brun clair à brun foncé sur les feuilles.</li>
+                <li><strong>Fusariose (Fusarium spp.)</strong>: Provoque des taches brun rougeâtre sur les épis et les grains, entraînant une réduction de la qualité du grain.</li>
+                <li><strong>Carie (Tilletia spp.)</strong>: Les grains infectés deviennent des masses poudreuses de spores noires.</li>
+            </ol>
+            <h3>Orge</h3>
+            <ol>
+                <li><strong>Rhynchosporiose (Rhynchosporium secalis)</strong>: Provoque des taches ovales brun grisâtre sur les feuilles et les gaines foliaires.</li>
+                <li><strong>Helminthosporiose (Drechslera teres)</strong>: Se manifeste par des taches brunes en forme de fuseau sur les feuilles.</li>
+                <li><strong>Oïdium (Blumeria graminis f. sp. hordei)</strong>: Comme chez le blé, elle se présente sous forme de poudre blanche sur les feuilles.</li>
+                <li><strong>Rouille naine (Puccinia hordei)</strong>: Provoque des pustules brun orangé sur les feuilles et les tiges.</li>
+                <li><strong>Fusariose des épis (Fusarium spp.)</strong>: Similaire à celle du blé, cette maladie affecte les épis et réduit la qualité du grain.</li>
+            </ol>
+            <h3>Triticale</h3>
+            <ol>
+                <li><strong>Rouilles</strong>: Les triticales sont sensibles aux mêmes types de rouilles que le blé, y compris la rouille jaune, la rouille brune et la rouille noire.</li>
+                <li><strong>Septorioses</strong>: Affecte les feuilles et les épis, similaire à la septoriose du blé.</li>
+                <li><strong>Fusariose</strong>: Provoque des symptômes similaires à ceux observés sur le blé et l'orge, affectant la qualité des grains.</li>
+            </ol>
+            <h3>Gestion des Maladies</h3>
+            <ul>
+                <li><strong>Rotation des Cultures</strong>: Éviter la monoculture et pratiquer la rotation des cultures pour réduire la pression des maladies.</li>
+                <li><strong>Variétés Résistantes</strong>: Utiliser des variétés de céréales résistantes aux maladies.</li>
+                <li><strong>Traitement des Semences</strong>: Appliquer des fongicides aux semences pour protéger les plantules contre les maladies.</li>
+                <li><strong>Fongicides</strong>: Appliquer des fongicides foliaires pendant la saison de croissance pour contrôler les infections.</li>
+                <li><strong>Pratiques Culturales</strong>: Utiliser des techniques de culture appropriées comme l'espacement adéquat des plantes, l'irrigation contrôlée et la gestion des résidus de culture pour minimiser les conditions favorables aux maladies.</li>
+            </ul>
+        </section>
+        <section class="useful-links" id="liens-utiles">
+            <h2>Liens utiles</h2>
+            <p>Pour obtenir des informations sur les laboratoires de recherche sur les céréales en Tunisie, voici quelques institutions clés à contacter :</p>
+            <h3>1. Institut National Agronomique de Tunisie (INAT)</h3>
+            <p>L'INAT est l'une des principales institutions de recherche agronomique en Tunisie. Il abrite plusieurs laboratoires de recherche spécialisés, y compris ceux dédiés à la génétique et à l'amélioration des céréales.</p>
+            <p><strong>Coordonnées :</strong></p>
+            <ul>
+                <li><strong>Adresse</strong> : 43, Avenue Charles Nicolle 1082 - Tunis- Mahrajène, Tunisie</li>
+                <li><strong>Téléphone</strong> : (+216) 71 287 110 / 71 289 431</li>
+                <li><strong>Fax</strong> : (+216) 71 892 785</li>
+                <li><strong>Email</strong> : <a href="mailto:dg@inat.ucar.tn">dg@inat.ucar.tn</a></li>
+                <li><strong>Site web</strong> : <a href="http://www.inat.tn">INAT</a></li>
+            </ul>
+            <h3>2. Institut National de la Recherche Agronomique de Tunisie (INRAT)</h3>
+            <p>L'INRAT est une autre institution clé pour la recherche agronomique en Tunisie, avec des laboratoires spécialisés dans les grandes cultures, y compris les céréales.</p>
+            <p><strong>Coordonnées :</strong></p>
+            <ul>
+                <li><strong>Adresse</strong> : Rue Hédi Karray, Tunis, Tunisie</li>
+                <li><strong>Téléphone</strong> : (+216) 71 230 024</li>
+                <li><strong>Fax</strong> : (+216) 71 752 897</li>
+                <li><strong>Email</strong> : <a href="mailto:inrat@agrinet.tn">inrat@agrinet.tn</a></li>
+                <li><strong>Site web</strong> : <a href="http://www.inrat.agrinet.tn">INRAT</a></li>
+            </ul>
+            <h3>3. Laboratoire de Génétique et Amélioration des Céréales (LGAC)</h3>
+            <p>Ce laboratoire, faisant partie de l'INAT, se concentre sur la recherche en génétique et l'amélioration des variétés de céréales.</p>
+            <p><strong>Coordonnées :</strong></p>
+            <ul>
+                <li><strong>Adresse</strong> : 43, Avenue Charles Nicolle 1082 - Tunis- Mahrajène, Tunisie</li>
+                <li><strong>Téléphone</strong> : (+216) 71 287 110 / 71 289 431</li>
+                <li><strong>Fax</strong> : (+216) 71 892 785</li>
+                <li><strong>Email</strong> : <a href="mailto:dg@inat.ucar.tn">dg@inat.ucar.tn</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <!-- Footer -->
+<div class="ft">
+    <footer class="footer p-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h2>COSEM</h2>
+                </div>
+                <div class="col-md-3">
+                    <h5>À propos</h5>
+                    <p>
+                        La COSEM est dédiée à soutenir les agriculteurs avec les dernières informations, 
+                        outils et ressources.
+                         Notre mission est d'habiliter les agriculteurs
+                          à atteindre une productivité et une durabilité accrues.
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contactez-nous</h5>
+                    <ul class="list-unstyled">
+                        <li>E-mail: cosem@planet.tn</li>
+                        <li>Téléphone: 71 607 117</li>
+                        <li>Fax: 71 606 917</li>
+                        <a href="https://maps.app.goo.gl/PQt2s4M92UAZgvCv9">
+                            <li>Adresse: Siège Social: 46, Rue des Travailleurs - 2010 Manouba, Tunisie</li>
+                        </a>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>
+                    Suivez-nous :
+                    <ul class="list-inline footer-links">
+                        <li class="list-inline-item">
+                            <a href="https://www.facebook.com/semencescosemtunisie">
+                                <i class="fab fa-facebook"></i>
+                            </a>
+                        </li>
+                    </ul>
+                    </h5>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-md-6">
+                    <p>© 2024 COSEM .Tous droits réservés.</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-12 text-end">
+                    <p style="color: #303030 !important;">Ce site web a été développé par Slim Dridi et Nada Naffeti, avec la supervision de l'encadrante à l'ESSAI Ines Abdeljaoued-Tej .</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.querySelector('.sidebar');
+    const header = document.querySelector('.hder');
+    const footer = document.querySelector('.ft');
+
+    function updateSidebarVisibility() {
+        const scrollPosition = window.scrollY;
+        const viewportHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        const headerHeight = header.offsetHeight;
+        const footerHeight = footer.offsetHeight;
+        const footerTopPosition = documentHeight - footerHeight - viewportHeight;
+
+        // Determine sidebar position based on header and footer
+        if (scrollPosition < headerHeight && scrollPosition < footerTopPosition) {
+            sidebar.style.position = 'fixed';
+            sidebar.style.top = `${headerHeight}px`; // Adjust to start below header
+            sidebar.style.bottom = ''; // Remove any bottom value
+        } else if (scrollPosition >= footerTopPosition) {
+            sidebar.style.position = 'absolute';
+            sidebar.style.top = '';
+            sidebar.style.bottom = '0px'; // Adjust to stop at the footer
+        } else {
+            sidebar.style.position = 'fixed';
+            sidebar.style.top = '0px'; // Start from the top if above header
+            sidebar.style.bottom = '';
+        }
+    }
+
+    // Update sidebar visibility on scroll
+    window.addEventListener('scroll', updateSidebarVisibility);
+
+    // Update sidebar visibility on initial load
+    updateSidebarVisibility();
+});
+
+        // Initialize AOS
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 1000, // Animation duration
+            easing: 'ease-in-out', // Easing function
+            once: true // Only animate once
+        });
+    });
+
+    // Add AOS attribute to intro section
+    document.querySelector('.intro-section').setAttribute('data-aos', 'fade-in');
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const links = document.querySelectorAll('.sidebar a');
+
+        links.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 150, /* Adjust this value as needed */
+                    behavior: 'smooth'
+                });
+            });
+        });
+    });
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.11.6/umd/popper.min.js"></script>
+
+</body>
+</html>

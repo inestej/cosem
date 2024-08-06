@@ -1,0 +1,200 @@
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Nunito', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #faf5e8;
+
+}
+
+.hder {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-header {
+    text-align: center;
+}
+
+.title h1 {
+    margin: 0;
+    line-height: 1.2;
+    color: #333;
+}
+
+.main-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 4em;
+    display: inline-block;
+}
+.sub-title {
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    color: #8bc34a;
+    position: relative;
+    top: -10px;
+}
+
+/* Sidebar styles */
+.sidebar {
+    position: fixed; /* Keep fixed positioning by default */
+    top: 100px; /* Make sure this is below the header */
+    width: 250px;
+    height: calc(100vh - 100px - 100px); /* Adjust height for footer spacing */
+    padding: 20px;
+    background-color: #f0f0f0;
+    overflow-y: auto;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    z-index: 1000; /* Ensure it's above other content */
+    margin-top: 150px;
+}
+
+.sidebar a {
+    display: block;
+    color: #333;
+    padding: 10px 0;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.sidebar a:hover {
+    color: #ff6347;
+}
+
+.content {
+    margin-left: 270px;
+    padding: 20px;
+    margin-right: 100px;
+}
+@media (max-width: 1606px) {
+    .sidebar {
+        display: none;
+    }
+
+    .content {
+        margin-left: 0; /* Adjust content margin for smaller screens */
+    }
+}
+main {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+.intro-section {
+    margin-top: 100px;
+    margin-bottom: 30px;
+}
+
+.intro-paragraph {
+    font-size: 1.5em; /* Increase font size */
+    font-weight: bold; /* Make text bold */
+    color: #333; /* Text color */
+    background-color: #f9f2c7; /* Light yellow background */
+    padding: 20px; /* Add padding */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.5s ease-in-out; /* Smooth transition */
+    opacity: 0; /* Initial opacity for animation */
+    transform: translateY(20px); /* Initial position for animation */
+}
+
+.intro-section[data-aos="fade-in"] .intro-paragraph {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* General Text Styles */
+.intro-section p {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2em; /* Slightly larger font size for better readability */
+    line-height: 1.8; /* Increased line height for improved spacing */
+    color: #4a4a4a; /* Softer text color for easier reading */
+    margin-bottom: 20px; /* Consistent bottom margin */
+}
+
+/* Section Specific Styles */
+.wheat-dur h2, .wheat-soft h2, .barley h2, .triticale h2, .cultural-practices h2, .challenges h2, .diseases h2, .useful-links h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 2.5em; /* Larger font size */
+    background: linear-gradient(135deg, #ff6347, #ffa500); /* Gradient text */
+    -webkit-background-clip: text; /* Clip background to text */
+    -webkit-text-fill-color: transparent; /* Make text transparent to show gradient */
+    display: inline-block;
+    border-bottom: 4px solid #ff6347; /* Thicker border */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease-in-out; /* Animation on hover */
+}
+
+.wheat-dur h2:hover, .wheat-soft h2:hover, .barley h2:hover, .triticale h2:hover, .cultural-practices h2:hover, .challenges h2:hover, .diseases h2:hover, .useful-links h2:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+}
+
+/* Styles for h3 elements within specific sections */
+.wheat-dur h3, .wheat-soft h3, .barley h3, .triticale h3, .cultural-practices h3, .challenges h3, .diseases h3, .useful-links h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.8em; /* Slightly larger font size for subheadings */
+    color: #333; /* Darker text color for subheadings */
+    margin-bottom: 15px;
+    border-bottom: 2px solid #ff6347; /* Border for subheadings */
+    padding-bottom: 5px;
+}
+
+/* Additional styles for lists within sections */
+.wheat-dur ul, .wheat-soft ul, .barley ul, .triticale ul, .cultural-practices ul, .challenges ul, .diseases ul, .useful-links ul {
+    list-style-type: disc; /* Default bullet style */
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.wheat-dur ol, .wheat-soft ol, .barley ol, .triticale ol, .cultural-practices ol, .challenges ol, .diseases ol, .useful-links ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.wheat-dur li, .wheat-soft li, .barley li, .triticale li, .cultural-practices li, .challenges li, .diseases li, .useful-links li {
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Styles for anchor tags within the useful-links section */
+.useful-links a {
+    color: #ff6347; /* Link color */
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.useful-links a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
+/* Section Spacing */
+section {
+    margin-bottom: 40px; /* Increased margin for better separation */
+    padding: 15px; /* Add padding for better spacing */
+    background-color: #f9f9f9; /* Light background for section distinction */
+    border-radius: 8px; /* Rounded corners for modern look */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    scroll-margin-top: 60px; /* Adjust this value as needed */
+}
+
+/* Responsive Adjustments */
+@media (min-width: 768px) {
+    main {
+        padding: 35px; /* Slightly increased padding for medium screens */
+    }
+}
+
+@media (min-width: 992px) {
+    main {
+        padding: 50px; /* Increased padding for large screens */
+    }
+}
