@@ -181,6 +181,10 @@ create_polygon_table()
 def home():
     return render_template('home.html')
 
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
@@ -289,6 +293,10 @@ def gallery_fr():
 @app.route('/')
 def home_fr():
     return render_template('home_fr.html')
+
+@app.route('/about_fr')
+def about_fr():
+    return render_template('about_fr.html')
 
 @app.route('/contact_fr', methods=['GET', 'POST'])
 def contact_fr():

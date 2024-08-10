@@ -2,7 +2,7 @@
     opacity: 1;
 }
 .nav-link {
-    opacity: 2;
+    opacity: 1;
     font-weight: bold;
     color: #6c757d !important;
 }
@@ -58,6 +58,7 @@
 }
 
 .navbar {
+    z-index: 2;
     transition: background-color 0.5s ease-in-out;
     background: linear-gradient(135deg, #a8e6cf 0%, #dcedc1 100%) !important;
 }

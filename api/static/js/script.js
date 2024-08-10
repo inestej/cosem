@@ -1,9 +1,4 @@
-// Custom interval time (milliseconds)
-$(document).ready(function(){
-    $('#carouselExampleFade').carousel({
-      interval: 1000 // 1 second
-    });
-  });
+
   
 //navbar
 window.addEventListener('scroll', function() {
@@ -21,12 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     AOS.init();
 });
 
-// Custom interval time (milliseconds)
-$(document).ready(function(){
-    $('#carouselExampleFade').carousel({
-        interval: 1000 // 1 second
-    });
-});
 
 // IntersectionObserver for section animations
 document.addEventListener('DOMContentLoaded', () => {
@@ -50,4 +39,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+const images = [
+    'https://i.postimg.cc/XJXGG887/crop-fuild.jpg',
+    'https://i.postimg.cc/VNKDnmx9/crop-fuild2-1.jpg',
+    'https://i.postimg.cc/VNKDnmx9/crop-fuild2-2.jpg'
+];
+
+let currentIndex = 0;
+
+function updateBackgroundImage() {
+    const hero = document.querySelector('.hero');
+    hero.style.backgroundImage = `url(${images[currentIndex]})`;
+}
+
+function moveSlide(direction) {
+    currentIndex = (currentIndex + direction + images.length) % images.length;
+    updateBackgroundImage();
+}
+
+// Initial image
+updateBackgroundImage();
+
+// Auto-play (optional)
+setInterval(() => moveSlide(1), 5000);
 

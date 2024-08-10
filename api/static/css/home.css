@@ -1,0 +1,310 @@
+/* General Styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    background: #f9f9f9;
+}
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+
+
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    position: relative;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 0 2rem;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 1s ease-in-out, opacity 0.5s ease-in-out;
+    opacity: 1;
+}
+
+.hero-overlay {
+    background: rgba(0, 95, 86, 0.7);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.hero-text {
+    z-index: 1;
+    max-width: 700px;
+}
+
+.hero h2 {
+    color: black;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    animation: fadeInDown 1s ease-in-out;
+}
+
+.hero p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    animation: fadeInUp 1s ease-in-out;
+}
+
+.cta-button {
+    background: #fbef73;
+    color: #fff;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s, transform 0.3s;
+}
+
+.cta-button:hover {
+    background: #ff9700;
+    transform: scale(1.05);
+}
+
+/* About Section */
+.about {
+    padding: 12rem 0;
+    text-align: center;
+    background: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.about h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #005f56;
+    position: relative;
+}
+
+.about h2::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: #fbef73;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.about p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+    color: #666;
+}
+
+/* Features Section */
+.features {
+    padding: 8rem 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8rem;
+}
+
+.feature {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    flex: 1 1 calc(50% - 1rem);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: transform 0.3s;
+    margin: 30px;
+}
+
+.feature:hover {
+    transform: translateY(-10px);
+}
+
+.feature h3 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: #005f56;
+}
+
+.feature p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Benefits Section */
+.benefits {
+    padding: 4rem 0;
+    text-align: center;
+    background: #f4f4f4;
+}
+
+.benefits h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #005f56;
+    position: relative;
+}
+
+.benefits h2::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: #fbef73;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.benefits ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.benefits ul li {
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+}
+
+.benefits ul li::before {
+    content: '✔️';
+    color: #fbef73;
+    margin-right: 0.5rem;
+}
+
+/* Testimonials Section */
+.testimonials {
+    background: #fff;
+    padding: 4rem 0;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.testimonials h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #005f56;
+    position: relative;
+}
+
+.testimonials h2::after {
+    content: '';
+    width: 50px;
+    height: 3px;
+    background: #fbef73;
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.testimonial {
+    margin-bottom: 2rem;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.testimonial p {
+    font-size: 1.1rem;
+    color: #666;
+}
+
+/* Call to Action Section */
+.cta {
+    padding: 4rem 0;
+    text-align: center;
+    background: #005f56;
+    color: #fff;
+}
+
+.cta h2 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: black;
+}
+
+.cta p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+}
+
+.cta .cta-button {
+    background: #fbef73;
+}
+
+.cta .cta-button:hover {
+    background: #ff9700;
+}
+
+/* Animations */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .hero p {
+        font-size: 1.25rem;
+    }
+
+    .features {
+        flex-direction: column;
+    }
+
+    .feature {
+        flex: 1 1 100%;
+    }
+}

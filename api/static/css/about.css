@@ -1,0 +1,31 @@
+.hder {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #a8e6cf, #dcedc1);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gallery-header {
+    text-align: center;
+}
+
+.title h1 {
+    margin: 0;
+    line-height: 1.2;
+    color: #333;
+}
+.main-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 4em;
+    display: inline-block;
+}
+.sub-title {
+    font-family: 'Lobster', cursive;
+    font-size: 2em;
+    color: #8bc34a;
+    position: relative;
+    top: -10px;
+}
