@@ -1,15 +1,19 @@
+/* ===== MOBILE-FIRST STYLES ===== */
 .hder {
     margin: 0;
     font-family: 'Arial', sans-serif;
     background: linear-gradient(135deg, #a8e6cf, #dcedc1);
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 20px 15px;
+    box-sizing: border-box;
 }
 
 .gallery-header {
     text-align: center;
+    width: 100%;
 }
 
 .title h1 {
@@ -17,15 +21,54 @@
     line-height: 1.2;
     color: #333;
 }
+
 .main-title {
     font-family: 'Oswald', sans-serif;
-    font-size: 4em;
+    font-size: 2.5em; /* Taille réduite pour mobile */
     display: inline-block;
+    word-wrap: break-word;
 }
+
 .sub-title {
     font-family: 'Lobster', cursive;
-    font-size: 2em;
+    font-size: 1.5em; /* Taille réduite pour mobile */
     color: #8bc34a;
     position: relative;
-    top: -10px;
+    top: -5px;
+}
+
+/* ===== TABLET STYLES (768px and up) ===== */
+@media (min-width: 768px) {
+    .hder {
+        padding: 30px 20px;
+    }
+    
+    .main-title {
+        font-size: 3.5em;
+    }
+    
+    .sub-title {
+        font-size: 1.8em;
+        top: -8px;
+    }
+}
+
+/* ===== DESKTOP STYLES (1024px and up) ===== */
+@media (min-width: 1024px) {
+    .main-title {
+        font-size: 4em; /* Taille originale sur desktop */
+    }
+    
+    .sub-title {
+        font-size: 2em; /* Taille originale sur desktop */
+        top: -10px;
+    }
+}
+
+/* ===== LARGE DESKTOP STYLES (1200px and up) ===== */
+@media (min-width: 1200px) {
+    .gallery-header {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
